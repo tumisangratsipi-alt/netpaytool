@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://networthrank.com/sitemap.xml",
+    sitemap: "https://netpaytool.com/sitemap.xml",
   };
 }

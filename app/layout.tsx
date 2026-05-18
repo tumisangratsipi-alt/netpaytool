@@ -2,25 +2,24 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Net Worth Percentile Calculator — Where Do You Rank?",
+  title: "Take-Home Pay Calculator — Net Pay After Taxes",
   description:
-    "Find out where your net worth ranks among Americans your age. Uses Federal Reserve 2022 Survey of Consumer Finances data. Free, no sign-up.",
-  metadataBase: new URL("https://networthrank.com"),
+    "Calculate your exact take-home pay after federal, state, and FICA taxes. All 50 states. 2024 tax brackets. Free, no sign-up.",
+  metadataBase: new URL("https://netpaytool.com"),
   openGraph: {
-    title: "Net Worth Percentile Calculator",
-    description:
-      "See where your net worth ranks among Americans your age. Federal Reserve data.",
-    url: "https://networthrank.com",
-    siteName: "networthrank.com",
+    title: "Take-Home Pay Calculator",
+    description: "See your exact net pay after all taxes. All 50 states, 2024 brackets.",
+    url: "https://netpaytool.com",
+    siteName: "netpaytool.com",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Net Worth Percentile Calculator",
-    description: "See where your net worth ranks among Americans your age.",
+    title: "Take-Home Pay Calculator",
+    description: "See your exact net pay after federal, state, and FICA taxes.",
   },
   alternates: {
-    canonical: "https://networthrank.com",
+    canonical: "https://netpaytool.com",
   },
 };
 

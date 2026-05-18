@@ -2,44 +2,32 @@
 @import "tw-animate-css";
 
 /* ============================================================
-   SATELLITE DESIGN SYSTEM — based on CalcMoney globals.css
-   To build a new satellite site:
-   1. Copy this file
-   2. Find/replace ACCENT values below with the site's color
-   3. Update body::after glow color to match
-   ACCENT COLORS (networthrank = Gold):
-   Primary:   #D4AF37   (amber-500)
-   Light:     #F5C518   (amber-400)
-   Dark:      #B8960C   (amber-600)
-   Glow:      rgba(212, 175, 55, 0.15)
+   SATELLITE DESIGN SYSTEM — netpaytool.com
+   ACCENT: Emerald Green — #22C55E / #4ADE80 / #16A34A
    ============================================================ */
 
 @theme {
   --font-sans: system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
 
-  /* Backgrounds */
   --color-background: #09090B;
   --color-foreground: #F0F6FC;
   --color-border: rgba(255, 255, 255, 0.08);
   --color-panel: #111318;
   --color-surface: #16181F;
 
-  /* Metallic Gold — ACCENT */
+  /* ACCENT — Emerald Green */
+  --color-accent-400: #4ADE80;
+  --color-accent-500: #22C55E;
+  --color-accent-600: #16A34A;
+  --color-accent-700: #166534;
+
   --color-amber-400: #F5C518;
   --color-amber-500: #D4AF37;
-  --color-amber-600: #B8960C;
-  --color-amber-700: #9A7D0A;
-
-  /* Money Green */
   --color-emerald-400: #4ADE80;
   --color-emerald-500: #22C55E;
   --color-emerald-600: #16A34A;
 
-  /* HUD tokens */
-  --color-hud-amber: #D4AF37;
-  --color-hud-gold: #F5C518;
-  --color-hud-glow: rgba(212, 175, 55, 0.15);
   --color-hud-positive: #22C55E;
   --color-hud-negative: #EF4444;
 }
@@ -49,75 +37,64 @@
     --background: #09090B;
     --foreground: #F0F6FC;
 
-    /* Colors — Void */
     --void-800: #09090B;
     --void-700: #111318;
     --void-600: #16181F;
-    --void-500: #1C1E27;
 
-    /* Colors — Metallic Gold — ACCENT */
+    /* ACCENT — Emerald */
+    --accent-400: #4ADE80;
+    --accent-500: #22C55E;
+    --accent-600: #16A34A;
+    --accent-700: #166534;
+    --accent-glow:        rgba(34, 197, 94, 0.15);
+    --accent-glow-strong: rgba(34, 197, 94, 0.35);
+    --accent-glow-subtle: rgba(34, 197, 94, 0.06);
+
+    /* Keep amber for positive/money signals */
     --amber-400: #F5C518;
     --amber-500: #D4AF37;
-    --amber-600: #B8960C;
-    --amber-700: #9A7D0A;
-    --amber-glow:        rgba(212, 175, 55, 0.15);
-    --amber-glow-strong: rgba(212, 175, 55, 0.35);
-    --amber-glow-subtle: rgba(212, 175, 55, 0.06);
 
-    /* Colors — Money Green */
+    /* Keep emerald tokens */
     --emerald-400: #4ADE80;
     --emerald-500: #22C55E;
     --emerald-600: #16A34A;
-    --emerald-glow: rgba(22, 197, 94, 0.15);
+    --emerald-glow: rgba(34, 197, 94, 0.15);
 
-    /* Colors — Rose (negative) */
     --rose-500: #EF4444;
     --rose-glow: rgba(239, 68, 68, 0.15);
 
-    /* Semantic text */
     --text-primary:   #F0F6FC;
     --text-secondary: #C9D1D9;
     --text-muted:     #8B949E;
     --text-disabled:  #334155;
     --text-inverse:   #09090B;
 
-    /* Semantic borders */
     --border-subtle:    rgba(255, 255, 255, 0.06);
     --border-default:   rgba(255, 255, 255, 0.08);
     --border-emphasis:  rgba(255, 255, 255, 0.12);
-    --border-amber:     rgba(212, 175, 55, 0.25);
-    --border-amber-hot: rgba(212, 175, 55, 0.50);
+    --border-accent:    rgba(34, 197, 94, 0.25);
+    --border-accent-hot: rgba(34, 197, 94, 0.50);
 
-    /* Border radius */
     --radius-sharp:   4px;
     --radius-default: 8px;
     --radius-smooth:  12px;
     --radius-round:   16px;
 
-    /* Shadows */
-    --shadow-glow-sm: 0 0 10px rgba(212, 175, 55, 0.08), 0 0 4px rgba(212, 175, 55, 0.04);
-    --shadow-glow-md: 0 0 20px rgba(212, 175, 55, 0.12), 0 0 8px rgba(212, 175, 55, 0.06);
-    --shadow-inset-panel: inset 0 1px 1px rgba(255, 255, 255, 0.1), inset 0 -1px 1px rgba(212, 175, 55, 0.04), 0 0 50px rgba(0, 0, 0, 0.5);
+    --shadow-glow-sm: 0 0 10px rgba(34, 197, 94, 0.08), 0 0 4px rgba(34, 197, 94, 0.04);
+    --shadow-glow-md: 0 0 20px rgba(34, 197, 94, 0.12), 0 0 8px rgba(34, 197, 94, 0.06);
+    --shadow-inset-panel: inset 0 1px 1px rgba(255, 255, 255, 0.1), inset 0 -1px 1px rgba(34, 197, 94, 0.04), 0 0 50px rgba(0, 0, 0, 0.5);
 
-    /* Z-index scale */
-    --z-base:     0;
-    --z-card:     10;
-    --z-sticky:   100;
-    --z-dropdown: 200;
-    --z-modal:    300;
-
-    /* Animation curves */
     --ease-snap:       cubic-bezier(0.2, 0, 0, 1);
     --ease-smooth:     cubic-bezier(0.4, 0, 0.2, 1);
     --ease-expressive: cubic-bezier(0.16, 1, 0.3, 1);
 
     /* ShadCN compat */
     --radius: 0.625rem;
-    --primary: #D4AF37;
+    --primary: #22C55E;
     --primary-foreground: #09090B;
     --border: rgba(255, 255, 255, 0.07);
     --input: rgba(255, 255, 255, 0.06);
-    --ring: #D4AF37;
+    --ring: #22C55E;
     --muted-foreground: oklch(0.708 0 0);
   }
 
@@ -134,7 +111,7 @@
   }
 
   *:focus-visible {
-    outline: 2px solid rgba(212, 175, 55, 0.55);
+    outline: 2px solid rgba(34, 197, 94, 0.55);
     outline-offset: 3px;
     border-radius: 4px;
   }
@@ -168,24 +145,19 @@ body::after {
 body::before {
   top: -10%; left: -5%;
   width: 20vw; height: 20vh;
-  background-color: #D4AF37; /* ACCENT */
-  opacity: 0.035;
+  background-color: #22C55E;
+  opacity: 0.03;
 }
 body::after {
   bottom: -5%; right: -5%;
   width: 18vw; height: 18vh;
   background-color: #166534;
-  opacity: 0.03;
+  opacity: 0.025;
 }
 
 @layer components {
 
-  /* Holographic Glass Card
-     FIX vs CalcMoney: isolation:isolate + z-index:-1 on pseudo-elements
-     ensures ::after gradient border never covers plain-div content.
-     CalcMoney works without this because ShadCN components set
-     position:relative on their own, pushing them above ::after.
-     Satellites use plain divs — they need explicit stacking. */
+  /* Holographic Glass Card — isolation fix baked in */
   .aura-panel {
     @apply bg-white/[0.04] backdrop-blur-xl border border-white/[0.08] rounded-2xl transition-all duration-500 shadow-2xl shadow-black/60 relative overflow-hidden;
     box-shadow: var(--shadow-inset-panel);
@@ -198,10 +170,10 @@ body::after {
     @apply absolute inset-0 rounded-2xl pointer-events-none;
     z-index: -1;
     background: linear-gradient(135deg,
-        rgba(212, 175, 55, 0.06) 0%,   /* ACCENT glow */
+        rgba(34, 197, 94, 0.06) 0%,
         transparent 40%,
         transparent 60%,
-        rgba(212, 175, 55, 0.03) 100%); /* ACCENT glow */
+        rgba(34, 197, 94, 0.03) 100%);
   }
 
   .aura-panel::after {
@@ -213,103 +185,94 @@ body::after {
     background:
       linear-gradient(#09090B, #09090B) padding-box,
       linear-gradient(135deg,
-        rgba(212, 175, 55, 0.35) 0%,   /* ACCENT border */
+        rgba(34, 197, 94, 0.35) 0%,
         transparent 30%,
         transparent 70%,
-        rgba(212, 175, 55, 0.15) 100%) border-box; /* ACCENT border */
+        rgba(34, 197, 94, 0.15) 100%) border-box;
   }
 
   .aura-panel:hover {
     @apply bg-white/[0.06] -translate-y-0.5;
     box-shadow:
       inset 0 1px 1px rgba(255, 255, 255, 0.15),
-      inset 0 -1px 1px rgba(212, 175, 55, 0.08),
-      0 0 60px rgba(212, 175, 55, 0.06),
+      inset 0 -1px 1px rgba(34, 197, 94, 0.08),
+      0 0 60px rgba(34, 197, 94, 0.06),
       0 20px 60px rgba(0, 0, 0, 0.5);
   }
 
-  /* Holographic data panel — result output areas */
   .holo-panel {
     @apply relative rounded-xl overflow-hidden;
     background: linear-gradient(180deg, rgba(10, 10, 20, 0.95) 0%, rgba(9, 11, 20, 0.98) 100%);
-    border: 1px solid rgba(212, 175, 55, 0.15); /* ACCENT */
+    border: 1px solid rgba(34, 197, 94, 0.15);
     box-shadow:
       0 0 0 1px rgba(255, 255, 255, 0.03),
-      inset 0 1px 0 rgba(212, 175, 55, 0.1),    /* ACCENT */
+      inset 0 1px 0 rgba(34, 197, 94, 0.1),
       0 20px 60px rgba(0, 0, 0, 0.6),
-      0 0 100px rgba(212, 175, 55, 0.04);        /* ACCENT */
+      0 0 100px rgba(34, 197, 94, 0.04);
   }
 }
 
 @layer utilities {
-  /* Gradient text */
   .text-gradient-1 {
-    background: linear-gradient(135deg, #D4AF37 0%, #F5C518 40%, #ffffff 100%); /* ACCENT */
+    background: linear-gradient(135deg, #16A34A 0%, #22C55E 45%, #86EFAC 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .text-gradient-gold {
-    background: linear-gradient(135deg, #9A7D0A 0%, #D4AF37 45%, #F5C518 100%); /* ACCENT */
+    background: linear-gradient(135deg, #166534 0%, #22C55E 50%, #4ADE80 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  .text-gradient-green {
-    background: linear-gradient(135deg, #166534 0%, #22C55E 55%, #86EFAC 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  /* Terminal label — uppercase mono */
   .terminal-label {
     @apply text-[10px] font-mono font-bold uppercase tracking-widest text-slate-500;
   }
 
-  /* Gold glow on numbers */
-  .glow-amber {
-    text-shadow: 0 0 12px rgba(212, 175, 55, 0.25); /* ACCENT */
+  .glow-emerald {
+    text-shadow: 0 0 12px rgba(34, 197, 94, 0.3);
   }
 
-  /* Tabular gold numbers */
   .tabular-gold {
     @apply font-mono tracking-widest tabular-nums;
-    color: #D4AF37; /* ACCENT */
+    color: #22C55E;
   }
 
-  /* Orbital CTA button */
   .btn-orbital {
-    @apply relative inline-flex items-center justify-center font-mono tracking-[0.15em] uppercase text-sm border border-amber-500/50 bg-transparent text-amber-400 transition-all duration-500 rounded-md px-6 py-3 shadow-[0_0_10px_rgba(212,175,55,0.1)];
+    @apply relative inline-flex items-center justify-center font-mono tracking-[0.15em] uppercase text-sm bg-transparent transition-all duration-500 rounded-md px-6 py-3;
+    border: 1px solid rgba(34, 197, 94, 0.5);
+    color: #4ADE80;
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.1);
   }
   .btn-orbital:hover {
-    @apply text-white border-white bg-amber-500/20 shadow-[0_0_20px_rgba(212,175,55,0.5)];
+    color: #fff;
+    border-color: #fff;
+    background: rgba(34, 197, 94, 0.2);
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.5);
   }
 
-  /* Solid gold primary button */
   .btn-primary-gold {
     @apply relative inline-flex items-center justify-center font-bold text-sm rounded-md px-6 py-3 transition-all duration-150 w-full;
-    background: linear-gradient(135deg, #D4AF37 0%, #F5C518 100%); /* ACCENT */
+    background: linear-gradient(135deg, #16A34A 0%, #22C55E 100%);
     color: #09090B;
     border: none;
   }
   .btn-primary-gold:hover {
     opacity: 0.92;
     transform: translateY(-1px);
-    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); /* ACCENT */
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
   }
   .btn-primary-gold:active {
     transform: translateY(0);
   }
 
-  /* Gradient border result panel */
   .gradient-border-result {
     border: 1px solid transparent;
     background-image:
       linear-gradient(#05060A, #05060A),
-      linear-gradient(135deg, rgba(212,175,55,0.22) 0%, rgba(212,175,55,0.07) 40%, transparent 70%); /* ACCENT */
+      linear-gradient(135deg, rgba(34,197,94,0.22) 0%, rgba(34,197,94,0.07) 40%, transparent 70%);
     background-origin: border-box;
     background-clip: padding-box, border-box;
     position: relative;
@@ -322,8 +285,8 @@ body::after {
     background: linear-gradient(
       90deg,
       transparent 0%,
-      rgba(212,175,55,0.55) 25%, /* ACCENT */
-      rgba(212,175,55,0.55) 75%, /* ACCENT */
+      rgba(34,197,94,0.55) 25%,
+      rgba(34,197,94,0.55) 75%,
       transparent 100%
     );
     border-radius: 2px 2px 0 0;
@@ -340,15 +303,15 @@ input[type="text"] {
 input[type="number"]:focus,
 input[type="text"]:focus {
   outline: none;
-  border-color: rgba(212, 175, 55, 0.45) !important; /* ACCENT */
-  box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.12);    /* ACCENT */
+  border-color: rgba(34, 197, 94, 0.45) !important;
+  box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.12);
 }
 
-/* Terminal scrollbar */
+/* Scrollbar */
 ::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: #09090B; }
-::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.3); border-radius: 2px; } /* ACCENT */
-::-webkit-scrollbar-thumb:hover { background: rgba(212, 175, 55, 0.6); }               /* ACCENT */
+::-webkit-scrollbar-thumb { background: rgba(34, 197, 94, 0.3); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(34, 197, 94, 0.6); }
 
 /* Live dot */
 .live-dot {
@@ -366,48 +329,23 @@ input[type="text"]:focus {
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.001ms !important;
-    transition-duration: 0.001ms !important;
-  }
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
   .aura-panel { will-change: auto; }
 }
 
 /* Mobile */
 @media (max-width: 768px) {
-  body::before { filter: blur(80px); opacity: 0.06; }
+  body::before { filter: blur(80px); opacity: 0.05; }
   body::after  { filter: blur(80px); opacity: 0.03; }
-
   .aura-panel:hover { transform: none; }
-
-  .aura-panel {
-    backdrop-filter: blur(8px);
-  }
-
-  .holo-panel {
-    box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.03),
-      0 10px 30px rgba(0, 0, 0, 0.5);
-  }
-
+  .aura-panel { backdrop-filter: blur(8px); }
+  .holo-panel { box-shadow: 0 0 0 1px rgba(255,255,255,0.03), 0 10px 30px rgba(0,0,0,0.5); }
   main { padding-bottom: env(safe-area-inset-bottom, 0px); }
 }
 
-/* Touch devices */
 @media (hover: none) {
   .aura-panel:hover { transform: none; }
-  .aura-panel:active {
-    background: rgba(255, 255, 255, 0.06);
-    transform: scale(0.99);
-  }
-  .btn-orbital:active {
-    color: #fff;
-    border-color: #fff;
-    background: rgba(212, 175, 55, 0.2); /* ACCENT */
-    box-shadow: 0 0 20px rgba(212, 175, 55, 0.5); /* ACCENT */
-  }
-  button, a, [role="button"] {
-    min-height: 44px;
-    min-width: 44px;
-  }
+  .aura-panel:active { background: rgba(255,255,255,0.06); transform: scale(0.99); }
+  .btn-orbital:active { color: #fff; border-color: #fff; background: rgba(34,197,94,0.2); box-shadow: 0 0 20px rgba(34,197,94,0.5); }
+  button, a, [role="button"] { min-height: 44px; min-width: 44px; }
 }
