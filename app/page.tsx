@@ -61,7 +61,8 @@ export default function Home() {
         style={{ background: "rgba(9,9,11,0.95)", borderColor: "var(--border)", backdropFilter: "blur(8px)" }}
       >
         <div className="max-w-2xl mx-auto px-4 py-4 flex items-center justify-between">
-          <a href="/" className="font-bold text-lg tracking-tight" style={{ color: "var(--text-primary)", textDecoration: "none" }}>
+          <a href="/" className="font-bold text-lg tracking-tight flex items-center gap-2" style={{ color: "var(--text-primary)", textDecoration: "none" }}>
+            <img src="/logo.png" alt="NetPayTool logo" style={{ height: "28px", width: "auto" }} />
             <span className="text-gradient-1">netpay</span>tool.com
           </a>
           <span className="text-xs" style={{ color: "var(--text-muted)" }}>2024 IRS Tax Brackets</span>
