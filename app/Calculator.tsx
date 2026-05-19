@@ -13,6 +13,8 @@ import {
   type FilingStatus,
   type PayPeriod,
 } from "@/lib/tax-data";
+import { resolveNetPayRoute, type NetPayRouteResult } from "@/lib/routingLogic";
+import { logTelemetry } from "@/actions/logTelemetry";
 
 const STATE_CODES = Object.keys(STATE_NAMES).sort((a, b) =>
   STATE_NAMES[a].localeCompare(STATE_NAMES[b])
@@ -149,12 +151,49 @@ function ResultCard({ result, period }: { result: ReturnType<typeof calculateTax
   );
 }
 
+function AffiliateCTA({ route }: { route: NetPayRouteResult }) {
+  if (route.product === "none" || !route.url) return null;
+  return (
+    <div
+      className="mt-6 p-4 rounded-xl"
+      style={{
+        background: route.product === "national_debt_relief"
+          ? "rgba(239,68,68,0.06)"
+          : "rgba(34,197,94,0.06)",
+        border: `1px solid ${route.colorHex}33`,
+      }}
+    >
+      <p className="text-xs font-bold uppercase tracking-wider mb-1" style={{ color: route.colorHex }}>
+        Based on your debt load
+      </p>
+      <p className="text-sm mb-3 leading-relaxed" style={{ color: "var(--text-muted)" }}>
+        {route.sublabel}
+      </p>
+      <a
+        href={route.url}
+        target="_blank"
+        rel="noopener noreferrer sponsored"
+        className="block w-full text-center py-3 rounded-lg font-bold text-sm transition-all"
+        style={{
+          background: route.colorHex,
+          color: "#09090B",
+          textDecoration: "none",
+        }}
+      >
+        {route.label} &rarr;
+      </a>
+    </div>
+  );
+}
+
 export default function Calculator() {
   const [salaryInput, setSalaryInput] = useState("");
+  const [debtInput, setDebtInput] = useState("");
   const [filingStatus, setFilingStatus] = useState<FilingStatus | "">("");
   const [stateCode, setStateCode] = useState("");
   const [period, setPeriod] = useState<PayPeriod>("biweekly");
   const [result, setResult] = useState<ReturnType<typeof calculateTax> | null>(null);
+  const [route, setRoute] = useState<NetPayRouteResult | null>(null);
   const [error, setError] = useState("");
 
   const handleCalculate = () => {
@@ -173,8 +212,25 @@ export default function Calculator() {
       setError("Select your state.");
       return;
     }
+
+    const debt = parseFloat(debtInput.replace(/[$,\s]/g, "")) || 0;
     const res = calculateTax(salary, filingStatus as FilingStatus, stateCode);
+    const routeResult = resolveNetPayRoute(salary, debt);
+
     setResult(res);
+    setRoute(routeResult);
+
+    // Fire-and-forget — never awaited
+    const filingCode = filingStatus === "single" ? 0 : filingStatus === "married" ? 1 : 2;
+    const periodCodes: Record<PayPeriod, number> = { weekly: 1, biweekly: 2, semimonthly: 4, monthly: 12, annual: 0 };
+    void logTelemetry({
+      annual_income: salary,
+      debt_amount: debt,
+      filing_status_code: filingCode as 0 | 1 | 2,
+      pay_period_code: periodCodes[period],
+      state_code: stateCode,
+    });
+
     setTimeout(() => {
       document.getElementById("result")?.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 100);
@@ -210,6 +266,24 @@ export default function Calculator() {
             />
             <p className="text-xs mt-2" style={{ color: "var(--text-muted)" }}>
               Total salary before taxes. Hourly? Multiply: rate × hours/week × 52.
+            </p>
+          </div>
+
+          <div>
+            <label className="terminal-label block mb-2">Total outstanding debt <span style={{ color: "var(--text-muted)", fontWeight: 400 }}>(optional)</span></label>
+            <input
+              type="text"
+              inputMode="numeric"
+              placeholder="0"
+              value={debtInput}
+              onChange={(e) => setDebtInput(e.target.value)}
+              onKeyDown={handleKeyDown}
+              autoComplete="off"
+              className="w-full rounded-md px-4 py-3 text-base font-mono tracking-wider transition-colors"
+              style={inputStyle}
+            />
+            <p className="text-xs mt-2" style={{ color: "var(--text-muted)" }}>
+              Credit cards, auto loans, student debt. Used to surface relevant resources.
             </p>
           </div>
 
@@ -287,6 +361,7 @@ export default function Calculator() {
 
       <div id="result">
         {result && <ResultCard result={result} period={period} />}
+        {route && <AffiliateCTA route={route} />}
       </div>
     </div>
   );
