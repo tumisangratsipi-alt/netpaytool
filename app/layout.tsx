@@ -21,6 +21,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://netpaytool.com",
   },
+  verification: {
+    google: "_KltCpzlVEgeRJqOA0WosRMxk_eDtrgw3N5tVgzY-30",
+  },
 };
 
 export default function RootLayout({
