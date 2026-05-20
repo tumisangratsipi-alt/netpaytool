@@ -130,6 +130,8 @@ export default function Home() {
           </div>
           <p className="mt-3 text-xs">
             Not financial or tax advice. Results are estimates based on standard deductions and effective state rates. &copy; {new Date().getFullYear()} netpaytool.com
+            {" · "}
+            <a href="/privacy" style={{ color: "#22C55E", textDecoration: "none" }}>Privacy</a>
           </p>
         </div>
       </footer>
