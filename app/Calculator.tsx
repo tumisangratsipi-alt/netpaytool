@@ -186,11 +186,17 @@ function AffiliateCTA({ route }: { route: NetPayRouteResult }) {
   );
 }
 
-export default function Calculator() {
-  const [salaryInput, setSalaryInput] = useState("");
+export default function Calculator({
+  defaultSalary,
+  defaultState,
+}: {
+  defaultSalary?: number;
+  defaultState?: string;
+}) {
+  const [salaryInput, setSalaryInput] = useState(defaultSalary ? String(defaultSalary) : "");
   const [debtInput, setDebtInput] = useState("");
   const [filingStatus, setFilingStatus] = useState<FilingStatus | "">("");
-  const [stateCode, setStateCode] = useState("");
+  const [stateCode, setStateCode] = useState(defaultState ?? "");
   const [period, setPeriod] = useState<PayPeriod>("biweekly");
   const [result, setResult] = useState<ReturnType<typeof calculateTax> | null>(null);
   const [route, setRoute] = useState<NetPayRouteResult | null>(null);
