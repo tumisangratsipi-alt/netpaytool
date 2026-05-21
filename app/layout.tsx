@@ -37,6 +37,10 @@ export default function RootLayout({
   const adsenseId = process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID;
   return (
     <html lang="en">
+      <head>
+        {/* @ts-expect-error impact.com requires non-standard value= attribute */}
+        <meta name="impact-site-verification" value="41e64dbd-d879-45ca-8f64-af8a5a2fe986" />
+      </head>
       <body className="min-h-screen flex flex-col">
         {children}
         {adsenseId && (
