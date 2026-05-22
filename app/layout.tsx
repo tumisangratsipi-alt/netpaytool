@@ -1,6 +1,21 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { DM_Serif_Display, Inter } from "next/font/google";
 import "./globals.css";
+
+const dmSerifDisplay = DM_Serif_Display({
+  weight: "400",
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Take-Home Pay Calculator — Net Pay After Taxes",
@@ -36,7 +51,7 @@ export default function RootLayout({
 }>) {
   const adsenseId = process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID;
   return (
-    <html lang="en">
+    <html lang="en" className={`${dmSerifDisplay.variable} ${inter.variable}`}>
       <head>
         {/* @ts-expect-error impact.com requires non-standard value= attribute */}
         <meta name="impact-site-verification" value="41e64dbd-d879-45ca-8f64-af8a5a2fe986" />

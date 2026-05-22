@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "scope": "app",
+  "design_system": "shared/design.md",
+  "runs": [
+    {
+      "date": "2026-05-22",
+      "verb": "redesign",
+      "site": "netpaytool.com",
+      "macrostructure": "Narrative Workflow",
+      "genre": "atmospheric",
+      "theme": "dark-violet-void",
+      "accent": "oklch(73% 0.175 293)",
+      "fonts": ["DM Serif Display", "Inter"],
+      "changes": ["OKLCH token migration", "emerald accent restored", "solid CTA", "removed static orbs", "result-glow", "overflow-x clip", "DM Serif + Inter fonts"],
+      "stamp": "/* Hallmark · macrostructure: Narrative Workflow · genre: atmospheric · design-system: shared/design.md */"
+    }
+  ]
+}

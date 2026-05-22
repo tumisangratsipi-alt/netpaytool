@@ -1,106 +1,175 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-/* ============================================================
-   SATELLITE DESIGN SYSTEM — netpaytool.com
-   ACCENT: Emerald Green — #22C55E / #4ADE80 / #16A34A
-   ============================================================ */
+/* Hallmark · macrostructure: Narrative Workflow · genre: atmospheric · design-system: shared/design.md
+ * site: netpaytool.com · theme: dark-violet-void · accent: violet */
 
 @theme {
-  --font-sans: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: "DM Serif Display", Georgia, serif;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
 
+  /* Backgrounds */
   --color-background: #09090B;
   --color-foreground: #F0F6FC;
   --color-border: rgba(255, 255, 255, 0.08);
   --color-panel: #111318;
   --color-surface: #16181F;
 
-  /* ACCENT — Emerald Green */
-  --color-accent-400: #4ADE80;
-  --color-accent-500: #22C55E;
-  --color-accent-600: #16A34A;
-  --color-accent-700: #166534;
+  /* Violet — ACCENT */
+  --color-amber-400: #C4B5FD;
+  --color-amber-500: #A78BFA;
+  --color-amber-600: #7C3AED;
+  --color-amber-700: #5B21B6;
 
-  --color-amber-400: #F5C518;
-  --color-amber-500: #D4AF37;
-  --color-emerald-400: #4ADE80;
-  --color-emerald-500: #22C55E;
-  --color-emerald-600: #16A34A;
+  /* Secondary gold (for cross-reference) */
+  --color-gold-500: #D4AF37;
 
+  /* HUD tokens */
+  --color-hud-amber: #A78BFA;
+  --color-hud-gold: #C4B5FD;
+  --color-hud-glow: rgba(167, 139, 250, 0.15);
   --color-hud-positive: #22C55E;
   --color-hud-negative: #EF4444;
 }
 
 @layer base {
   :root {
-    --background: #09090B;
-    --foreground: #F0F6FC;
+    --background: oklch(10% 0.008 265);
+    --foreground: oklch(96% 0.005 220);
 
-    --void-800: #09090B;
-    --void-700: #111318;
-    --void-600: #16181F;
+    /* Paper — void dark (OKLCH) */
+    --color-paper:   oklch(10% 0.008 265);
+    --color-paper-2: oklch(13% 0.010 265);
+    --color-paper-3: oklch(16% 0.012 265);
+    --color-paper-4: oklch(19% 0.010 265);
 
-    /* ACCENT — Emerald */
-    --accent-400: #4ADE80;
-    --accent-500: #22C55E;
-    --accent-600: #16A34A;
-    --accent-700: #166534;
-    --accent-glow:        rgba(34, 197, 94, 0.15);
-    --accent-glow-strong: rgba(34, 197, 94, 0.35);
-    --accent-glow-subtle: rgba(34, 197, 94, 0.06);
+    /* Ink (OKLCH) */
+    --color-ink:          oklch(96% 0.005 220);
+    --color-ink-2:        oklch(83% 0.008 220);
+    --color-ink-muted:    oklch(62% 0.010 220);
+    --color-ink-disabled: oklch(30% 0.005 220);
 
-    /* Keep amber for positive/money signals */
-    --amber-400: #F5C518;
-    --amber-500: #D4AF37;
+    /* Accent — violet (OKLCH) */
+    --color-accent:      oklch(73% 0.175 293);
+    --color-accent-2:    oklch(80% 0.155 293);
+    --color-accent-dark: oklch(52% 0.235 290);
+    --color-accent-ink:  oklch(10% 0.008 265);
 
-    /* Keep emerald tokens */
-    --emerald-400: #4ADE80;
-    --emerald-500: #22C55E;
-    --emerald-600: #16A34A;
-    --emerald-glow: rgba(34, 197, 94, 0.15);
+    /* Glow variants */
+    --color-accent-glow:        oklch(73% 0.175 293 / 0.15);
+    --color-accent-glow-strong: oklch(73% 0.175 293 / 0.35);
+    --color-accent-glow-subtle: oklch(73% 0.175 293 / 0.06);
 
-    --rose-500: #EF4444;
-    --rose-glow: rgba(239, 68, 68, 0.15);
+    /* Semantic data colours */
+    --color-positive: oklch(73% 0.175 293);
+    --color-negative: oklch(60% 0.200 27);
+    --color-focus:    oklch(73% 0.175 293 / 0.65);
 
-    --text-primary:   #F0F6FC;
-    --text-secondary: #C9D1D9;
-    --text-muted:     #8B949E;
-    --text-disabled:  #334155;
-    --text-inverse:   #09090B;
+    /* Semantic text aliases */
+    --text:           var(--color-ink);
+    --text-primary:   var(--color-ink);
+    --text-secondary: var(--color-ink-2);
+    --text-muted:     var(--color-ink-muted);
+    --text-disabled:  var(--color-ink-disabled);
+    --text-inverse:   var(--color-accent-ink);
 
-    --border-subtle:    rgba(255, 255, 255, 0.06);
-    --border-default:   rgba(255, 255, 255, 0.08);
-    --border-emphasis:  rgba(255, 255, 255, 0.12);
-    --border-accent:    rgba(34, 197, 94, 0.25);
-    --border-accent-hot: rgba(34, 197, 94, 0.50);
+    /* Semantic borders */
+    --border-subtle:     oklch(100% 0 0 / 0.06);
+    --border-default:    oklch(100% 0 0 / 0.08);
+    --border-emphasis:   oklch(100% 0 0 / 0.12);
+    --border-accent:     oklch(73% 0.175 293 / 0.25);
+    --border-accent-hot: oklch(73% 0.175 293 / 0.50);
 
+    /* Font tokens */
+    --font-display: "DM Serif Display", Georgia, serif;
+    --font-body:    "Inter", system-ui, sans-serif;
+    --font-outlier: "JetBrains Mono", "Fira Code", monospace;
+
+    /* Spacing — 4pt scale */
+    --space-3xs: 0.25rem;
+    --space-2xs: 0.5rem;
+    --space-xs:  0.75rem;
+    --space-sm:  1rem;
+    --space-md:  1.5rem;
+    --space-lg:  2rem;
+    --space-xl:  3rem;
+    --space-2xl: 4.5rem;
+    --space-3xl: 7rem;
+
+    /* Border radius */
     --radius-sharp:   4px;
     --radius-default: 8px;
     --radius-smooth:  12px;
     --radius-round:   16px;
 
-    --shadow-glow-sm: 0 0 10px rgba(34, 197, 94, 0.08), 0 0 4px rgba(34, 197, 94, 0.04);
-    --shadow-glow-md: 0 0 20px rgba(34, 197, 94, 0.12), 0 0 8px rgba(34, 197, 94, 0.06);
-    --shadow-inset-panel: inset 0 1px 1px rgba(255, 255, 255, 0.1), inset 0 -1px 1px rgba(34, 197, 94, 0.04), 0 0 50px rgba(0, 0, 0, 0.5);
+    /* Shadows */
+    --shadow-glow-sm: 0 0 10px oklch(73% 0.175 293 / 0.08), 0 0 4px oklch(73% 0.175 293 / 0.04);
+    --shadow-glow-md: 0 0 20px oklch(73% 0.175 293 / 0.12), 0 0 8px oklch(73% 0.175 293 / 0.06);
+    --shadow-inset-panel: inset 0 1px 1px oklch(100% 0 0 / 0.10),
+                          inset 0 -1px 1px oklch(73% 0.175 293 / 0.04),
+                          0 0 50px oklch(0% 0 0 / 0.50);
 
+    /* Z-index scale */
+    --z-base:     0;
+    --z-card:     10;
+    --z-sticky:   100;
+    --z-dropdown: 200;
+    --z-modal:    300;
+
+    /* Animation curves */
     --ease-snap:       cubic-bezier(0.2, 0, 0, 1);
     --ease-smooth:     cubic-bezier(0.4, 0, 0.2, 1);
     --ease-expressive: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-out:        cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-in:         cubic-bezier(0.4, 0, 1, 1);
+    --ease-in-out:     cubic-bezier(0.4, 0, 0.2, 1);
+    --dur-short: 150ms;
+    --dur-mid:   220ms;
+    --dur-long:  400ms;
 
     /* ShadCN compat */
     --radius: 0.625rem;
-    --primary: #22C55E;
-    --primary-foreground: #09090B;
-    --border: rgba(255, 255, 255, 0.07);
-    --input: rgba(255, 255, 255, 0.06);
-    --ring: #22C55E;
-    --muted-foreground: oklch(0.708 0 0);
+    --primary: oklch(73% 0.175 293);
+    --primary-foreground: oklch(10% 0.008 265);
+    --border: oklch(100% 0 0 / 0.07);
+    --input: oklch(100% 0 0 / 0.06);
+    --ring: oklch(73% 0.175 293);
+    --muted-foreground: oklch(62% 0.010 220);
+
+    /* Legacy aliases — emerald accent */
+    --void-800: oklch(10% 0.008 265);
+    --void-700: oklch(13% 0.010 265);
+    --void-600: oklch(16% 0.012 265);
+    --void-500: oklch(19% 0.010 265);
+    --amber-400: oklch(80% 0.155 293);
+    --amber-500: oklch(73% 0.175 293);
+    --amber-600: oklch(52% 0.235 290);
+    --amber-700: oklch(42% 0.200 288);
+    --amber-glow:        oklch(73% 0.175 293 / 0.15);
+    --amber-glow-strong: oklch(73% 0.175 293 / 0.35);
+    --amber-glow-subtle: oklch(73% 0.175 293 / 0.06);
+    --emerald-400: oklch(80% 0.155 293);
+    --emerald-500: oklch(73% 0.175 293);
+    --emerald-600: oklch(52% 0.235 290);
+    --emerald-glow: oklch(73% 0.175 293 / 0.15);
+    --rose-500: oklch(60% 0.200 27);
+    --rose-glow: oklch(60% 0.200 27 / 0.15);
+    /* Narrative Workflow step accent aliases */
+    --accent-400: oklch(82% 0.160 90);
+    --accent-500: oklch(73% 0.175 293);
+    --accent-600: oklch(62% 0.120 78);
+    --accent-glow: oklch(73% 0.175 293 / 0.15);
+    --accent-glow-strong: oklch(73% 0.175 293 / 0.35);
   }
 
   * {
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
+  }
+
+  html, body {
+    overflow-x: clip;
   }
 
   body {
@@ -111,7 +180,7 @@
   }
 
   *:focus-visible {
-    outline: 2px solid rgba(34, 197, 94, 0.55);
+    outline: 2px solid var(--color-focus);
     outline-offset: 3px;
     border-radius: 4px;
   }
@@ -132,32 +201,28 @@
   --color-primary-foreground: var(--primary-foreground);
 }
 
-/* Ambient glow orbs */
-body::before,
-body::after {
+/* Reactive glow — toggled on calculation complete, removed at zero-state */
+.result-glow {
+  position: relative;
+}
+.result-glow::after {
   content: '';
-  position: fixed;
-  border-radius: 9999px;
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  border: 1px solid var(--color-accent);
+  box-shadow: 0 0 24px var(--color-accent-glow), 0 0 8px var(--color-accent-glow-subtle);
   pointer-events: none;
-  z-index: 0;
-  filter: blur(120px);
+  animation: resultGlowFade 2.4s var(--ease-smooth) forwards;
 }
-body::before {
-  top: -10%; left: -5%;
-  width: 20vw; height: 20vh;
-  background-color: #22C55E;
-  opacity: 0.03;
-}
-body::after {
-  bottom: -5%; right: -5%;
-  width: 18vw; height: 18vh;
-  background-color: #166534;
-  opacity: 0.025;
+@keyframes resultGlowFade {
+  0%   { opacity: 1; }
+  60%  { opacity: 0.8; }
+  100% { opacity: 0; }
 }
 
 @layer components {
 
-  /* Holographic Glass Card — isolation fix baked in */
   .aura-panel {
     @apply bg-white/[0.04] backdrop-blur-xl border border-white/[0.08] rounded-2xl transition-all duration-500 shadow-2xl shadow-black/60 relative overflow-hidden;
     box-shadow: var(--shadow-inset-panel);
@@ -170,10 +235,10 @@ body::after {
     @apply absolute inset-0 rounded-2xl pointer-events-none;
     z-index: -1;
     background: linear-gradient(135deg,
-        rgba(34, 197, 94, 0.06) 0%,
+        oklch(73% 0.175 293 / 0.06) 0%,
         transparent 40%,
         transparent 60%,
-        rgba(34, 197, 94, 0.03) 100%);
+        oklch(73% 0.175 293 / 0.03) 100%);
   }
 
   .aura-panel::after {
@@ -183,96 +248,91 @@ body::after {
     z-index: -1;
     border: 1px solid transparent;
     background:
-      linear-gradient(#09090B, #09090B) padding-box,
+      linear-gradient(oklch(10% 0.008 265), oklch(10% 0.008 265)) padding-box,
       linear-gradient(135deg,
-        rgba(34, 197, 94, 0.35) 0%,
+        oklch(73% 0.175 293 / 0.35) 0%,
         transparent 30%,
         transparent 70%,
-        rgba(34, 197, 94, 0.15) 100%) border-box;
+        oklch(73% 0.175 293 / 0.15) 100%) border-box;
   }
 
   .aura-panel:hover {
     @apply bg-white/[0.06] -translate-y-0.5;
     box-shadow:
-      inset 0 1px 1px rgba(255, 255, 255, 0.15),
-      inset 0 -1px 1px rgba(34, 197, 94, 0.08),
-      0 0 60px rgba(34, 197, 94, 0.06),
-      0 20px 60px rgba(0, 0, 0, 0.5);
+      inset 0 1px 1px oklch(100% 0 0 / 0.15),
+      inset 0 -1px 1px oklch(73% 0.175 293 / 0.08),
+      0 0 60px var(--color-accent-glow-subtle),
+      0 20px 60px oklch(0% 0 0 / 0.50);
   }
 
   .holo-panel {
     @apply relative rounded-xl overflow-hidden;
-    background: linear-gradient(180deg, rgba(10, 10, 20, 0.95) 0%, rgba(9, 11, 20, 0.98) 100%);
-    border: 1px solid rgba(34, 197, 94, 0.15);
+    background: linear-gradient(180deg, oklch(11% 0.010 265 / 0.95) 0%, oklch(10% 0.008 265 / 0.98) 100%);
+    border: 1px solid oklch(73% 0.175 293 / 0.15);
     box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.03),
-      inset 0 1px 0 rgba(34, 197, 94, 0.1),
-      0 20px 60px rgba(0, 0, 0, 0.6),
-      0 0 100px rgba(34, 197, 94, 0.04);
+      0 0 0 1px oklch(100% 0 0 / 0.03),
+      inset 0 1px 0 oklch(73% 0.175 293 / 0.10),
+      0 20px 60px oklch(0% 0 0 / 0.60),
+      0 0 100px var(--color-accent-glow-subtle);
   }
 }
 
 @layer utilities {
+  /* Accent text — solid gold, no gradient */
   .text-gradient-1 {
-    background: linear-gradient(135deg, #16A34A 0%, #22C55E 45%, #86EFAC 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--color-accent-2);
   }
 
   .text-gradient-gold {
-    background: linear-gradient(135deg, #166534 0%, #22C55E 50%, #4ADE80 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--color-accent);
+  }
+
+  .text-gradient-green {
+    color: var(--color-positive);
   }
 
   .terminal-label {
     @apply text-[10px] font-mono font-bold uppercase tracking-widest text-slate-500;
   }
 
-  .glow-emerald {
-    text-shadow: 0 0 12px rgba(34, 197, 94, 0.3);
+  .glow-amber {
+    text-shadow: 0 0 12px var(--color-accent-glow);
   }
 
   .tabular-gold {
     @apply font-mono tracking-widest tabular-nums;
-    color: #22C55E;
+    color: var(--color-accent);
   }
 
   .btn-orbital {
-    @apply relative inline-flex items-center justify-center font-mono tracking-[0.15em] uppercase text-sm bg-transparent transition-all duration-500 rounded-md px-6 py-3;
-    border: 1px solid rgba(34, 197, 94, 0.5);
-    color: #4ADE80;
-    box-shadow: 0 0 10px rgba(34, 197, 94, 0.1);
+    @apply relative inline-flex items-center justify-center font-mono tracking-[0.15em] uppercase text-sm border border-amber-500/50 bg-transparent text-amber-400 transition-all duration-500 rounded-md px-6 py-3;
+    box-shadow: 0 0 10px var(--color-accent-glow-subtle);
   }
   .btn-orbital:hover {
-    color: #fff;
-    border-color: #fff;
-    background: rgba(34, 197, 94, 0.2);
-    box-shadow: 0 0 20px rgba(34, 197, 94, 0.5);
+    @apply text-white border-white bg-amber-500/20;
+    box-shadow: 0 0 20px var(--color-accent-glow);
   }
 
   .btn-primary-gold {
-    @apply relative inline-flex items-center justify-center font-bold text-sm rounded-md px-6 py-3 transition-all duration-150 w-full;
-    background: linear-gradient(135deg, #16A34A 0%, #22C55E 100%);
-    color: #09090B;
+    @apply relative inline-flex items-center justify-center font-bold text-sm px-6 py-3 transition-all duration-150 w-full;
+    background: var(--color-accent);
+    color: var(--color-accent-ink);
     border: none;
+    border-radius: var(--radius-sharp);
   }
   .btn-primary-gold:hover {
-    opacity: 0.92;
-    transform: translateY(-1px);
-    box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
+    background: var(--color-accent-2);
+    box-shadow: 0 0 20px var(--color-accent-glow);
   }
   .btn-primary-gold:active {
-    transform: translateY(0);
+    transform: translateY(1px);
   }
 
   .gradient-border-result {
     border: 1px solid transparent;
     background-image:
-      linear-gradient(#05060A, #05060A),
-      linear-gradient(135deg, rgba(34,197,94,0.22) 0%, rgba(34,197,94,0.07) 40%, transparent 70%);
+      linear-gradient(oklch(10% 0.005 265), oklch(10% 0.005 265)),
+      linear-gradient(135deg, oklch(73% 0.175 293 / 0.22) 0%, oklch(73% 0.175 293 / 0.07) 40%, transparent 70%);
     background-origin: border-box;
     background-clip: padding-box, border-box;
     position: relative;
@@ -285,8 +345,8 @@ body::after {
     background: linear-gradient(
       90deg,
       transparent 0%,
-      rgba(34,197,94,0.55) 25%,
-      rgba(34,197,94,0.55) 75%,
+      oklch(73% 0.175 293 / 0.55) 25%,
+      oklch(73% 0.175 293 / 0.55) 75%,
       transparent 100%
     );
     border-radius: 2px 2px 0 0;
@@ -303,49 +363,71 @@ input[type="text"] {
 input[type="number"]:focus,
 input[type="text"]:focus {
   outline: none;
-  border-color: rgba(34, 197, 94, 0.45) !important;
-  box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.12);
+  border-color: oklch(73% 0.175 293 / 0.45) !important;
+  box-shadow: 0 0 0 1px var(--color-accent-glow-subtle);
 }
 
-/* Scrollbar */
+/* Terminal scrollbar */
 ::-webkit-scrollbar { width: 4px; height: 4px; }
-::-webkit-scrollbar-track { background: #09090B; }
-::-webkit-scrollbar-thumb { background: rgba(34, 197, 94, 0.3); border-radius: 2px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(34, 197, 94, 0.6); }
+::-webkit-scrollbar-track { background: oklch(10% 0.008 265); }
+::-webkit-scrollbar-thumb { background: oklch(73% 0.175 293 / 0.30); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: oklch(73% 0.175 293 / 0.60); }
 
 /* Live dot */
 .live-dot {
   display: inline-block;
   width: 6px; height: 6px;
   border-radius: 50%;
-  background: #10B981;
-  box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+  background: var(--color-positive);
+  box-shadow: 0 0 8px oklch(73% 0.175 293 / 0.60);
   animation: livePulse 2s ease-in-out infinite;
 }
 @keyframes livePulse {
-  0%, 100% { opacity: 1; box-shadow: 0 0 8px rgba(16, 185, 129, 0.6); }
-  50%       { opacity: 0.4; box-shadow: 0 0 4px rgba(16, 185, 129, 0.3); }
+  0%, 100% { opacity: 1; box-shadow: 0 0 8px oklch(73% 0.175 293 / 0.60); }
+  50%       { opacity: 0.4; box-shadow: 0 0 4px oklch(73% 0.175 293 / 0.30); }
 }
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
   .aura-panel { will-change: auto; }
 }
 
 /* Mobile */
 @media (max-width: 768px) {
-  body::before { filter: blur(80px); opacity: 0.05; }
-  body::after  { filter: blur(80px); opacity: 0.03; }
   .aura-panel:hover { transform: none; }
-  .aura-panel { backdrop-filter: blur(8px); }
-  .holo-panel { box-shadow: 0 0 0 1px rgba(255,255,255,0.03), 0 10px 30px rgba(0,0,0,0.5); }
+
+  .aura-panel {
+    backdrop-filter: blur(8px);
+  }
+
+  .holo-panel {
+    box-shadow:
+      0 0 0 1px oklch(100% 0 0 / 0.03),
+      0 10px 30px oklch(0% 0 0 / 0.50);
+  }
+
   main { padding-bottom: env(safe-area-inset-bottom, 0px); }
 }
 
+/* Touch devices */
 @media (hover: none) {
   .aura-panel:hover { transform: none; }
-  .aura-panel:active { background: rgba(255,255,255,0.06); transform: scale(0.99); }
-  .btn-orbital:active { color: #fff; border-color: #fff; background: rgba(34,197,94,0.2); box-shadow: 0 0 20px rgba(34,197,94,0.5); }
-  button, a, [role="button"] { min-height: 44px; min-width: 44px; }
+  .aura-panel:active {
+    background: oklch(100% 0 0 / 0.06);
+    transform: scale(0.99);
+  }
+  .btn-orbital:active {
+    color: #fff;
+    border-color: #fff;
+    background: var(--color-accent-glow);
+    box-shadow: 0 0 20px var(--color-accent-glow);
+  }
+  button, a, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
 }
