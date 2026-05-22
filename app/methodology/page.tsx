@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+export const dynamic = 'force-static';
+
 export const metadata: Metadata = {
   title: "Methodology — Take-Home Pay Calculator",
   description: "How we calculate take-home pay. Tax brackets, FICA rates, state tax methodology, and limitations.",
