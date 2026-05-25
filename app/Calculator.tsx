@@ -15,6 +15,7 @@ import {
 } from "@/lib/tax-data";
 import { resolveNetPayRoute, type NetPayRouteResult } from "@/lib/routingLogic";
 import { logTelemetry } from "@/actions/logTelemetry";
+import { captureEmail } from "@/actions/captureEmail";
 
 const STATE_CODES = Object.keys(STATE_NAMES).sort((a, b) =>
   STATE_NAMES[a].localeCompare(STATE_NAMES[b])
@@ -368,7 +369,64 @@ export default function Calculator({
       <div id="result">
         {result && <ResultCard result={result} period={period} />}
         {route && <AffiliateCTA route={route} />}
+        {result && <EmailCapture />}
       </div>
+    </div>
+  );
+}
+
+/* ─── Email Capture ─────────────────────────────────────────── */
+
+function EmailCapture() {
+  const [email, setEmail]   = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
+  const [errMsg, setErrMsg] = useState("");
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setStatus("loading");
+    const res = await captureEmail(email);
+    if (res.ok) {
+      setStatus("done");
+    } else {
+      setErrMsg(res.error ?? "Something went wrong.");
+      setStatus("error");
+    }
+  }
+
+  if (status === "done") {
+    return (
+      <div className="mt-6 rounded-xl px-5 py-4 text-center" style={{ background: "var(--color-paper-2)", border: "1px solid var(--color-accent-dark)" }}>
+        <p className="text-sm font-semibold" style={{ color: "var(--color-accent)" }}>You&rsquo;re on the list.</p>
+        <p className="text-xs mt-1" style={{ color: "var(--color-ink-muted)" }}>We&rsquo;ll send paycheck optimization tips. Unsubscribe any time.</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="mt-6 rounded-xl px-5 py-5" style={{ background: "var(--color-paper-2)", border: "1px solid var(--color-border)" }}>
+      <p className="text-sm font-semibold mb-1" style={{ color: "var(--color-ink)" }}>Get paycheck tips + tax saving strategies</p>
+      <p className="text-xs mb-4" style={{ color: "var(--color-ink-muted)" }}>We break down what&rsquo;s eating your paycheck and how to keep more of it.</p>
+      <form onSubmit={handleSubmit} className="flex gap-2">
+        <input
+          type="email"
+          required
+          placeholder="you@email.com"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          className="flex-1 rounded-lg px-3 py-2 text-sm outline-none"
+          style={{ background: "var(--color-paper-3)", border: "1px solid var(--color-border)", color: "var(--color-ink)" }}
+        />
+        <button
+          type="submit"
+          disabled={status === "loading"}
+          className="rounded-lg px-4 py-2 text-sm font-semibold transition-opacity disabled:opacity-50"
+          style={{ background: "var(--color-accent)", color: "var(--color-accent-ink)" }}
+        >
+          {status === "loading" ? "..." : "Notify me"}
+        </button>
+      </form>
+      {status === "error" && <p className="text-xs mt-2" style={{ color: "var(--color-hud-negative)" }}>{errMsg}</p>}
     </div>
   );
 }
