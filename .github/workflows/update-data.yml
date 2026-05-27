@@ -1,0 +1,48 @@
+name: Update IRS Tax Bracket Data
+
+on:
+  schedule:
+    # Run every Monday at 09:00 UTC. IRS publishes new brackets in October.
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests beautifulsoup4
+
+      - name: Run IRS tax bracket update
+        id: update
+        run: python scripts/update-data.py
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: Check for file changes
+        id: diff
+        run: |
+          if git diff --quiet lib/tax-data.ts; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit and push updated data
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          git config user.name "data-bot"
+          git config user.email "data-bot@netpaytool.com"
+          git add lib/tax-data.ts
+          git commit -m "chore: auto-update IRS tax brackets $(date +%Y-%m-%d)"
+          git push
