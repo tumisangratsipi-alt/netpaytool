@@ -102,6 +102,39 @@ export default function Home() {
 
         <Calculator />
 
+        {/* Popular calculations */}
+        <section className="mt-14">
+          <h2 className="text-xl font-bold mb-4">Popular take-home pay calculations</h2>
+          <p className="text-sm mb-4" style={{ color: "var(--text-muted)" }}>
+            See exact net pay for common salaries in the most searched states.
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+            {[
+              { salary: 75000,  state: "ca", label: "$75K in California" },
+              { salary: 75000,  state: "tx", label: "$75K in Texas" },
+              { salary: 100000, state: "ca", label: "$100K in California" },
+              { salary: 100000, state: "tx", label: "$100K in Texas" },
+              { salary: 60000,  state: "fl", label: "$60K in Florida" },
+              { salary: 80000,  state: "ny", label: "$80K in New York" },
+              { salary: 90000,  state: "wa", label: "$90K in Washington" },
+              { salary: 65000,  state: "il", label: "$65K in Illinois" },
+              { salary: 55000,  state: "oh", label: "$55K in Ohio" },
+              { salary: 120000, state: "ca", label: "$120K in California" },
+              { salary: 50000,  state: "ga", label: "$50K in Georgia" },
+              { salary: 150000, state: "ny", label: "$150K in New York" },
+            ].map(({ salary, state, label }) => (
+              <Link
+                key={`${salary}-${state}`}
+                href={`/${salary}/${state}`}
+                className="aura-panel p-4 text-sm hover:opacity-80 transition-opacity"
+                style={{ textDecoration: "none", color: "var(--text-primary)" }}
+              >
+                {label}
+              </Link>
+            ))}
+          </div>
+        </section>
+
         {/* FAQ */}
         <section className="mt-14">
           <h2 className="text-xl font-bold mb-6">Frequently asked questions</h2>
