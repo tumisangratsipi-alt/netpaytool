@@ -5,17 +5,17 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Take-Home Pay Calculator — Net Pay After Taxes",
   description:
-    "Calculate your exact take-home pay after federal, state, and FICA taxes. All 50 states. 2024 tax brackets. Free, no sign-up.",
+    "Calculate your exact take-home pay after federal, state, and FICA taxes. All 50 states. 2025 tax brackets. Free, no sign-up.",
 };
 
 const faqItems = [
   {
     q: "What taxes are deducted from my paycheck?",
-    a: "Four main taxes come out of every paycheck: federal income tax (based on your income bracket and filing status), Social Security tax (6.2% up to $168,600), Medicare tax (1.45% on all wages, plus 0.9% over $200,000), and state income tax if your state has one. Nine states have no income tax: Alaska, Florida, Nevada, New Hampshire, South Dakota, Tennessee, Texas, Washington, and Wyoming.",
+    a: "Four main taxes come out of every paycheck: federal income tax (based on your income bracket and filing status), Social Security tax (6.2% up to $176,100 in 2025), Medicare tax (1.45% on all wages, plus 0.9% over $200,000), and state income tax if your state has one. Nine states have no income tax: Alaska, Florida, Nevada, New Hampshire, South Dakota, Tennessee, Texas, Washington, and Wyoming.",
   },
   {
     q: "Why is my take-home pay different from what this calculator shows?",
-    a: "This calculator uses the 2024 standard deduction and effective state tax rates. Your actual paycheck may differ based on: pre-tax deductions (401k, health insurance, HSA), additional W-4 withholding elections, local city or county taxes, and state-specific deductions. Use this as an estimate — your payroll department has the exact numbers.",
+    a: "This calculator uses the 2025 standard deduction and effective state tax rates. Your actual paycheck may differ based on: pre-tax deductions (401k, health insurance, HSA), additional W-4 withholding elections, local city or county taxes, and state-specific deductions. Use this as an estimate — your payroll department has the exact numbers.",
   },
   {
     q: "What is the difference between gross pay and net pay?",
@@ -23,7 +23,7 @@ const faqItems = [
   },
   {
     q: "How does filing status affect my take-home pay?",
-    a: "Filing status determines your tax bracket thresholds and standard deduction. Married filing jointly gets a $29,200 standard deduction (2024) versus $14,600 for single filers — meaning married couples shelter more income from federal tax. Head of household gets a $21,900 deduction. For the same gross salary, a married filer will typically take home more than a single filer.",
+    a: "Filing status determines your tax bracket thresholds and standard deduction. Married filing jointly gets a $30,000 standard deduction (2025) versus $15,000 for single filers, meaning married couples shelter more income from federal tax. Head of household gets a $22,500 deduction. For the same gross salary, a married filer will typically take home more than a single filer.",
   },
 ];
 
@@ -154,7 +154,7 @@ export default function Home() {
         <div className="max-w-2xl mx-auto px-4 py-8 text-sm" style={{ color: "var(--text-muted)" }}>
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <p>
-              2024 IRS federal tax brackets.{" "}
+              2025 IRS federal tax brackets.{" "}
               <Link href="/methodology" style={{ color: "#22C55E", textDecoration: "none" }}>
                 Methodology &rarr;
               </Link>

@@ -20,11 +20,11 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Take-Home Pay Calculator — Net Pay After Taxes",
   description:
-    "Calculate your exact take-home pay after federal, state, and FICA taxes. All 50 states. 2024 tax brackets. Free, no sign-up.",
+    "Calculate your exact take-home pay after federal, state, and FICA taxes. All 50 states. 2025 tax brackets. Free, no sign-up.",
   metadataBase: new URL("https://netpaytool.com"),
   openGraph: {
     title: "Take-Home Pay Calculator",
-    description: "See your exact net pay after all taxes. All 50 states, 2024 brackets.",
+    description: "See your exact net pay after all taxes. All 50 states, 2025 brackets.",
     url: "https://netpaytool.com",
     siteName: "netpaytool.com",
     type: "website",

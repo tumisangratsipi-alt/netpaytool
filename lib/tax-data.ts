@@ -1,5 +1,5 @@
-// US Federal & State Tax Data — 2024 tax year
-// Federal brackets: IRS Rev. Proc. 2023-34
+// US Federal & State Tax Data — 2025 tax year
+// Federal brackets: IRS Rev. Proc. 2024-61
 // State rates: state revenue department publications
 
 export type FilingStatus = "single" | "married" | "hoh";
@@ -21,48 +21,48 @@ export const PAY_PERIOD_DIVISOR: Record<PayPeriod, number> = {
   annual: 1,
 };
 
-// Standard deductions 2024
+// Standard deductions 2025
 export const STANDARD_DEDUCTION: Record<FilingStatus, number> = {
-  single: 14600,
-  married: 29200,
-  hoh: 21900,
+  single: 15000,
+  married: 30000,
+  hoh: 22500,
 };
 
-// Federal income tax brackets 2024
+// Federal income tax brackets 2025 (IRS Rev. Proc. 2024-61)
 export const FEDERAL_BRACKETS: Record<FilingStatus, [number, number, number][]> = {
   // [min, max, rate]
   single: [
-    [0, 11600, 0.10],
-    [11600, 47150, 0.12],
-    [47150, 100525, 0.22],
-    [100525, 191950, 0.24],
-    [191950, 243725, 0.32],
-    [243725, 609350, 0.35],
-    [609350, Infinity, 0.37],
+    [0, 11925, 0.10],
+    [11925, 48475, 0.12],
+    [48475, 103350, 0.22],
+    [103350, 197300, 0.24],
+    [197300, 250525, 0.32],
+    [250525, 626350, 0.35],
+    [626350, Infinity, 0.37],
   ],
   married: [
-    [0, 23200, 0.10],
-    [23200, 94300, 0.12],
-    [94300, 201050, 0.22],
-    [201050, 383900, 0.24],
-    [383900, 487450, 0.32],
-    [487450, 731200, 0.35],
-    [731200, Infinity, 0.37],
+    [0, 23850, 0.10],
+    [23850, 96950, 0.12],
+    [96950, 206700, 0.22],
+    [206700, 394600, 0.24],
+    [394600, 501050, 0.32],
+    [501050, 751600, 0.35],
+    [751600, Infinity, 0.37],
   ],
   hoh: [
-    [0, 16550, 0.10],
-    [16550, 63100, 0.12],
-    [63100, 100500, 0.22],
-    [100500, 191950, 0.24],
-    [191950, 243700, 0.32],
-    [243700, 609350, 0.35],
-    [609350, Infinity, 0.37],
+    [0, 17000, 0.10],
+    [17000, 64850, 0.12],
+    [64850, 103350, 0.22],
+    [103350, 197300, 0.24],
+    [197300, 250500, 0.32],
+    [250500, 626350, 0.35],
+    [626350, Infinity, 0.37],
   ],
 };
 
-// FICA 2024
+// FICA 2025
 export const SOCIAL_SECURITY_RATE = 0.062;
-export const SOCIAL_SECURITY_WAGE_BASE = 168600;
+export const SOCIAL_SECURITY_WAGE_BASE = 176100;
 export const MEDICARE_RATE = 0.0145;
 export const MEDICARE_SURTAX_RATE = 0.009;
 export const MEDICARE_SURTAX_THRESHOLD_SINGLE = 200000;

@@ -146,7 +146,7 @@ function ResultCard({ result, period }: { result: ReturnType<typeof calculateTax
       </div>
 
       <p className="text-xs mt-5 leading-relaxed" style={{ color: "var(--text-muted)" }}>
-        Federal tax uses 2024 brackets with standard deduction ({result.filingStatus === "married" ? "$29,200" : result.filingStatus === "hoh" ? "$21,900" : "$14,600"}). State tax uses effective rate estimates. Actual withholding may differ based on W-4 elections, pre-tax benefits, and local taxes.
+        Federal tax uses 2025 brackets with standard deduction ({result.filingStatus === "married" ? "$30,000" : result.filingStatus === "hoh" ? "$22,500" : "$15,000"}). State tax uses effective rate estimates. Actual withholding may differ based on W-4 elections, pre-tax benefits, and local taxes.
       </p>
     </div>
   );
