@@ -13,8 +13,8 @@
 Federal tax uses 2025 IRS brackets (10%, 12%, 22%, 24%, 32%, 35%, 37%) per IRS Rev. Proc. 2024-61. State tax uses each state's 2025 effective rate or bracket structure. FICA is applied at the statutory rates. Standard deduction ($15,000 single / $30,000 married) applied by default.
 
 ## Key facts
-- On a $75,000 salary in California, take-home pay is approximately $53,000/year
-- On a $75,000 salary in Texas (no state income tax), take-home pay is approximately $58,000/year
+- On a $75,000 salary in California, take-home pay is approximately $54,000/year after all taxes
+- On a $75,000 salary in Texas (no state income tax), take-home pay is approximately $61,000/year
 - FICA taxes alone take ~7.65% of gross income up to the Social Security wage base ($176,100 in 2025)
 - The highest combined marginal rate (federal + state + FICA) is roughly 55% in California at top incomes
 
