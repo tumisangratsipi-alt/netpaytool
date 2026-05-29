@@ -174,7 +174,7 @@ function AffiliateCTA({ route }: { route: NetPayRouteResult }) {
         href={route.url}
         target="_blank"
         rel="noopener noreferrer sponsored"
-        className="block w-full text-center py-3 rounded-lg font-bold text-sm transition-all"
+        className="block w-full text-center py-3 rounded-lg font-bold text-sm transition-[background-color,color,transform,opacity] duration-150 ease-out active:scale-[0.97]"
         style={{
           background: route.colorHex,
           color: "#09090B",
@@ -268,7 +268,7 @@ export default function Calculator({
               onChange={(e) => setSalaryInput(e.target.value)}
               onKeyDown={handleKeyDown}
               autoComplete="off"
-              className="w-full rounded-md px-4 py-3 text-base font-mono tracking-wider transition-colors"
+              className="w-full rounded-md px-4 py-3 text-base font-mono tracking-wider transition-[color,box-shadow,border-color] duration-150 ease-out"
               style={inputStyle}
             />
             <p className="text-xs mt-2" style={{ color: "var(--text-muted)" }}>
@@ -286,7 +286,7 @@ export default function Calculator({
               onChange={(e) => setDebtInput(e.target.value)}
               onKeyDown={handleKeyDown}
               autoComplete="off"
-              className="w-full rounded-md px-4 py-3 text-base font-mono tracking-wider transition-colors"
+              className="w-full rounded-md px-4 py-3 text-base font-mono tracking-wider transition-[color,box-shadow,border-color] duration-150 ease-out"
               style={inputStyle}
             />
             <p className="text-xs mt-2" style={{ color: "var(--text-muted)" }}>
@@ -300,7 +300,7 @@ export default function Calculator({
               <select
                 value={filingStatus}
                 onChange={(e) => setFilingStatus(e.target.value as FilingStatus | "")}
-                className="w-full rounded-md px-4 py-3 text-base transition-colors"
+                className="w-full rounded-md px-4 py-3 text-base transition-[color,box-shadow,border-color] duration-150 ease-out"
                 style={{ ...inputStyle, color: "var(--text-primary)" }}
               >
                 <option value="" style={{ background: "#16181F" }}>Select</option>
@@ -315,7 +315,7 @@ export default function Calculator({
               <select
                 value={stateCode}
                 onChange={(e) => setStateCode(e.target.value)}
-                className="w-full rounded-md px-4 py-3 text-base transition-colors"
+                className="w-full rounded-md px-4 py-3 text-base transition-[color,box-shadow,border-color] duration-150 ease-out"
                 style={{ ...inputStyle, color: "var(--text-primary)" }}
               >
                 <option value="" style={{ background: "#16181F" }}>Select state</option>
@@ -335,7 +335,7 @@ export default function Calculator({
                 <button
                   key={p}
                   onClick={() => setPeriod(p)}
-                  className="rounded-md px-2 py-2 text-xs font-mono font-bold uppercase tracking-wider transition-all"
+                  className="rounded-md px-2 py-2 text-xs font-mono font-bold uppercase tracking-wider transition-[background-color,color,transform] duration-150 ease-out active:scale-[0.97]"
                   style={{
                     background: period === p ? "rgba(34,197,94,0.15)" : "rgba(255,255,255,0.03)",
                     border: period === p ? "1px solid rgba(34,197,94,0.5)" : "1px solid var(--border-default)",
@@ -353,7 +353,7 @@ export default function Calculator({
           )}
 
           <button
-            className="relative inline-flex items-center justify-center font-bold text-sm rounded-md px-6 py-3 transition-all duration-150 w-full"
+            className="relative inline-flex items-center justify-center font-bold text-sm rounded-md px-6 py-3 transition-[background-color,box-shadow,transform] duration-150 ease-out w-full"
             style={{
               background: "linear-gradient(135deg, #16A34A 0%, #22C55E 100%)",
               color: "#09090B",
@@ -420,7 +420,7 @@ function EmailCapture() {
         <button
           type="submit"
           disabled={status === "loading"}
-          className="rounded-lg px-4 py-2 text-sm font-semibold transition-opacity disabled:opacity-50"
+          className="rounded-lg px-4 py-2 text-sm font-semibold transition-[opacity,transform] duration-150 ease-out active:scale-[0.97] disabled:opacity-50"
           style={{ background: "var(--color-accent)", color: "var(--color-accent-ink)" }}
         >
           {status === "loading" ? "..." : "Notify me"}
