@@ -94,7 +94,21 @@ export default async function CityPayPage({ params }: { params: Promise<{ slug: 
   const hasStateTax = medianResult.stateTax > 0;
 
   // JSON-LD: all content derived from static CITY_DATA — no user input.
-  const jsonLd = JSON.stringify({
+  const webpageJsonLd = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: `Take-Home Pay in ${city.name}`,
+    url: `https://netpaytool.com/city/${slug}`,
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "NetPayTool", item: "https://netpaytool.com" },
+        { "@type": "ListItem", position: 2, name: `Take-Home Pay in ${city.name}`, item: `https://netpaytool.com/city/${slug}` },
+      ],
+    },
+  });
+
+  const faqJsonLd = JSON.stringify({
     "@context": "https://schema.org",
     "@type": "FAQPage",
     mainEntity: faqs.map((f) => ({
@@ -106,7 +120,8 @@ export default async function CityPayPage({ params }: { params: Promise<{ slug: 
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: webpageJsonLd }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: faqJsonLd }} />
 
       <main className="max-w-2xl mx-auto px-4 py-10">
         <nav className="text-xs mb-6" style={{ color: "var(--text-muted)" }}>
