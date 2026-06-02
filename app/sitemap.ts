@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { STATE_NAMES } from "@/lib/tax-data";
+import { CITY_SLUGS } from "@/lib/city-data";
 
 const SALARY_TIERS = [
   30000, 40000, 45000, 50000, 55000, 60000, 65000, 70000, 75000,
@@ -20,6 +21,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   }
 
+  const cityPages: MetadataRoute.Sitemap = CITY_SLUGS.map((slug) => ({
+    url: `https://netpaytool.com/city/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: "yearly" as const,
+    priority: 0.8,
+  }));
+
   return [
     {
       url: "https://netpaytool.com",
@@ -34,5 +42,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.5,
     },
     ...salaryStatePages,
+    ...cityPages,
   ];
 }
