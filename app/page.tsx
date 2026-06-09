@@ -65,11 +65,14 @@ export default function Home() {
             <img src="/logo.png" alt="NetPayTool logo" style={{ height: "28px", width: "auto" }} />
             <span className="text-gradient-1">netpay</span>tool.com
           </a>
-          <nav className="flex items-center gap-1 flex-wrap">
-            <a href="https://calcmoney.io" target="_blank" rel="noopener" className="text-xs px-2.5 py-1 rounded-full transition-colors" style={{ color: "var(--color-accent)", border: "1px solid var(--color-accent-dark)", textDecoration: "none" }}>CalcMoney.io</a>
-            <a href="https://homebuycheck.com" target="_blank" rel="noopener" className="text-xs px-2.5 py-1 rounded-full transition-colors" style={{ color: "var(--color-ink-muted)", border: "1px solid var(--color-border)", textDecoration: "none" }}>Home Affordability</a>
-            <a href="https://salaryfact.com" target="_blank" rel="noopener" className="text-xs px-2.5 py-1 rounded-full transition-colors" style={{ color: "var(--color-ink-muted)", border: "1px solid var(--color-border)", textDecoration: "none" }}>Salary Rank</a>
-            <a href="https://networthrank.com" target="_blank" rel="noopener" className="text-xs px-2.5 py-1 rounded-full transition-colors" style={{ color: "var(--color-ink-muted)", border: "1px solid var(--color-border)", textDecoration: "none" }}>Net Worth Rank</a>
+          
+            {/* Mobile: single CTA */}
+            <a href="https://calcmoney.io" target="_blank" rel="noopener" className="sm:hidden text-xs px-3 py-1 rounded-full font-semibold" style={{ color: "var(--color-accent)", border: "1px solid var(--color-accent-dark)", textDecoration: "none" }}>More Tools →</a>
+          <nav className="hidden sm:flex items-center gap-1 overflow-hidden">
+            <a href="https://calcmoney.io" target="_blank" rel="noopener" className="text-xs px-2.5 py-1 rounded-full transition-[color,border-color] duration-150 ease-out" style={{ color: "var(--color-accent)", border: "1px solid var(--color-accent-dark)", textDecoration: "none" }}>CalcMoney.io</a>
+            <a href="https://homebuycheck.com" target="_blank" rel="noopener" className="text-xs px-2.5 py-1 rounded-full transition-[color,border-color] duration-150 ease-out" style={{ color: "var(--color-ink-muted)", border: "1px solid var(--color-border)", textDecoration: "none" }}>Home Affordability</a>
+            <a href="https://salaryfact.com" target="_blank" rel="noopener" className="text-xs px-2.5 py-1 rounded-full transition-[color,border-color] duration-150 ease-out" style={{ color: "var(--color-ink-muted)", border: "1px solid var(--color-border)", textDecoration: "none" }}>Salary Rank</a>
+            <a href="https://networthrank.com" target="_blank" rel="noopener" className="text-xs px-2.5 py-1 rounded-full transition-[color,border-color] duration-150 ease-out" style={{ color: "var(--color-ink-muted)", border: "1px solid var(--color-border)", textDecoration: "none" }}>Net Worth Rank</a>
           </nav>
         </div>
       </header>
@@ -126,7 +129,7 @@ export default function Home() {
               <Link
                 key={`${salary}-${state}`}
                 href={`/${salary}/${state}`}
-                className="aura-panel p-4 text-sm hover:opacity-80 transition-opacity"
+                className="aura-panel p-4 text-sm hover:opacity-80"
                 style={{ textDecoration: "none", color: "var(--text-primary)" }}
               >
                 {label}
