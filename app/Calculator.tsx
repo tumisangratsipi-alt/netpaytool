@@ -249,7 +249,7 @@ export default function Calculator({
 
   const inputStyle = {
     background: "rgba(255,255,255,0.04)",
-    border: "1px solid var(--border-default)",
+    border: "1px solid rgba(212,175,55,0.20)",
     color: "#4ADE80",
   };
 
@@ -268,7 +268,7 @@ export default function Calculator({
               onChange={(e) => setSalaryInput(e.target.value)}
               onKeyDown={handleKeyDown}
               autoComplete="off"
-              className="w-full rounded-md px-4 py-3 text-base font-mono tracking-wider transition-[color,box-shadow,border-color] duration-150 ease-out"
+              className="w-full rounded-lg px-4 py-3 text-base font-mono tracking-wider transition-[color,box-shadow,border-color] duration-150 ease-out"
               style={inputStyle}
             />
             <p className="text-xs mt-2" style={{ color: "var(--text-muted)" }}>
@@ -286,7 +286,7 @@ export default function Calculator({
               onChange={(e) => setDebtInput(e.target.value)}
               onKeyDown={handleKeyDown}
               autoComplete="off"
-              className="w-full rounded-md px-4 py-3 text-base font-mono tracking-wider transition-[color,box-shadow,border-color] duration-150 ease-out"
+              className="w-full rounded-lg px-4 py-3 text-base font-mono tracking-wider transition-[color,box-shadow,border-color] duration-150 ease-out"
               style={inputStyle}
             />
             <p className="text-xs mt-2" style={{ color: "var(--text-muted)" }}>
@@ -300,7 +300,7 @@ export default function Calculator({
               <select
                 value={filingStatus}
                 onChange={(e) => setFilingStatus(e.target.value as FilingStatus | "")}
-                className="w-full rounded-md px-4 py-3 text-base transition-[color,box-shadow,border-color] duration-150 ease-out"
+                className="w-full rounded-lg px-4 py-3 text-base transition-[color,box-shadow,border-color] duration-150 ease-out"
                 style={{ ...inputStyle, color: "var(--text-primary)" }}
               >
                 <option value="" style={{ background: "#16181F" }}>Select</option>
@@ -315,7 +315,7 @@ export default function Calculator({
               <select
                 value={stateCode}
                 onChange={(e) => setStateCode(e.target.value)}
-                className="w-full rounded-md px-4 py-3 text-base transition-[color,box-shadow,border-color] duration-150 ease-out"
+                className="w-full rounded-lg px-4 py-3 text-base transition-[color,box-shadow,border-color] duration-150 ease-out"
                 style={{ ...inputStyle, color: "var(--text-primary)" }}
               >
                 <option value="" style={{ background: "#16181F" }}>Select state</option>

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { DM_Serif_Display, Inter } from "next/font/google";
+import { DM_Serif_Display, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
 const dmSerifDisplay = DM_Serif_Display({
@@ -11,8 +11,9 @@ const dmSerifDisplay = DM_Serif_Display({
   display: "swap",
 });
 
-const inter = Inter({
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
   variable: "--font-sans",
   display: "swap",
 });
@@ -51,7 +52,7 @@ export default function RootLayout({
 }>) {
   const adsenseId = process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID;
   return (
-    <html lang="en" className={`${dmSerifDisplay.variable} ${inter.variable}`}>
+    <html lang="en" className={`${dmSerifDisplay.variable} ${plusJakartaSans.variable}`}>
       <head>
         {/* @ts-expect-error impact.com requires non-standard value= attribute */}
         <meta name="impact-site-verification" value="41e64dbd-d879-45ca-8f64-af8a5a2fe986" />
