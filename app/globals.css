@@ -224,7 +224,7 @@
 @layer components {
 
   .aura-panel {
-    @apply bg-white/[0.04] backdrop-blur-xl border border-white/[0.08] rounded-2xl transition-all duration-500 shadow-2xl shadow-black/60 relative overflow-hidden;
+    @apply bg-white/[0.04] backdrop-blur-xl border border-white/[0.08] rounded-2xl transition-[background-color,box-shadow,transform,opacity] duration-300 ease-out shadow-2xl shadow-black/60 relative overflow-hidden;
     box-shadow: var(--shadow-inset-panel);
     will-change: opacity, transform;
     isolation: isolate;

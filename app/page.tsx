@@ -164,8 +164,8 @@ export default function Home() {
             </p>
             <p>
               More tools at{" "}
-              <a href="https://calcmoney.io" target="_blank" rel="noopener noreferrer" style={{ color: "#22C55E", textDecoration: "none" }}>
-                CalcMoney.io
+              <a href="https://calcmoney.io/calculators/salary-to-hourly" target="_blank" rel="noopener noreferrer" style={{ color: "#22C55E", textDecoration: "none" }}>
+                CalcMoney salary calculator
               </a>
             </p>
           </div>

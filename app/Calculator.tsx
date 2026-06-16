@@ -148,6 +148,30 @@ function ResultCard({ result, period }: { result: ReturnType<typeof calculateTax
       <p className="text-xs mt-5 leading-relaxed" style={{ color: "var(--text-muted)" }}>
         Federal tax uses 2025 brackets with standard deduction ({result.filingStatus === "married" ? "$30,000" : result.filingStatus === "hoh" ? "$22,500" : "$15,000"}). State tax uses effective rate estimates. Actual withholding may differ based on W-4 elections, pre-tax benefits, and local taxes.
       </p>
+
+      <div className="mt-6 space-y-3">
+        <a
+          href="https://calcmoney.io/calculators/salary-to-hourly"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block w-full text-center py-3 rounded-lg font-bold text-sm transition-[background-color,transform] duration-150 ease-out"
+          style={{ background: "rgba(34,197,94,0.12)", color: "#22C55E", border: "1px solid rgba(34,197,94,0.3)", textDecoration: "none" }}
+        >
+          Full salary &rarr; hourly &rarr; net pay breakdown at CalcMoney &rarr;
+        </a>
+
+        <div className="pt-3 border-t" style={{ borderColor: "var(--border-default, rgba(255,255,255,0.06))" }}>
+          <p className="text-xs font-bold uppercase tracking-wider mb-2" style={{ color: "var(--text-muted)" }}>Related tools</p>
+          <div className="flex flex-col gap-2">
+            <a href="https://salaryfact.com" target="_blank" rel="noopener noreferrer" className="text-sm" style={{ color: "#22C55E", textDecoration: "none" }}>
+              SalaryFact — how does your salary compare in your city? &rarr;
+            </a>
+            <a href="https://networthrank.com" target="_blank" rel="noopener noreferrer" className="text-sm" style={{ color: "#22C55E", textDecoration: "none" }}>
+              NetWorthRank — what wealth percentile does your income put you in? &rarr;
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
