@@ -1,0 +1,90 @@
+name: Site Watchdog
+
+# Polls netpaytool.com every 5 minutes and auto-heals zombie next-server processes.
+# If the site returns non-200, SSHes in, kills stale processes, and touches the
+# Passenger restart file. Sends a Slack alert whether it healed or failed.
+#
+# Requires secrets:
+#   HOSTINGER_SSH_KEY    — private key for u262250925@82.197.80.250 (port 65002)
+#   SLACK_WEBHOOK_URL    — incoming webhook for #alerts (optional but recommended)
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: site-watchdog
+  cancel-in-progress: true
+
+jobs:
+  check-and-heal:
+    name: Check netpaytool.com
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+
+    steps:
+      - name: Check site health
+        id: health
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 10 https://netpaytool.com/ || echo "000")
+          echo "status=$STATUS" >> $GITHUB_OUTPUT
+          echo "Site returned: $STATUS"
+          if [ "$STATUS" = "200" ]; then
+            echo "healthy=true" >> $GITHUB_OUTPUT
+          else
+            echo "healthy=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Kill zombie processes
+        if: steps.health.outputs.healthy == 'false'
+        env:
+          SSH_KEY: ${{ secrets.HOSTINGER_SSH_KEY }}
+          HTTP_STATUS: ${{ steps.health.outputs.status }}
+        run: |
+          echo "$SSH_KEY" > /tmp/hostinger_key
+          chmod 600 /tmp/hostinger_key
+          echo "Site is down (HTTP $HTTP_STATUS). Killing zombie processes..."
+          ssh -p 65002 \
+            -i /tmp/hostinger_key \
+            -o StrictHostKeyChecking=no \
+            -o ConnectTimeout=15 \
+            -o ServerAliveInterval=5 \
+            u262250925@82.197.80.250 \
+            'pkill -f next-server; sleep 3; touch ~/domains/netpaytool.com/nodejs/tmp/restart.txt; echo "done"' \
+            || echo "SSH command failed — Hostinger may be unreachable"
+          rm -f /tmp/hostinger_key
+
+      - name: Verify recovery
+        if: steps.health.outputs.healthy == 'false'
+        id: verify
+        run: |
+          sleep 12
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 15 https://netpaytool.com/ || echo "000")
+          echo "status=$STATUS" >> $GITHUB_OUTPUT
+          echo "Post-heal status: $STATUS"
+          [ "$STATUS" = "200" ] && echo "recovered=true" >> $GITHUB_OUTPUT || echo "recovered=false" >> $GITHUB_OUTPUT
+
+      - name: Slack alert (healed)
+        if: steps.health.outputs.healthy == 'false' && steps.verify.outputs.recovered == 'true'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          PRE_STATUS: ${{ steps.health.outputs.status }}
+        run: |
+          [ -z "$SLACK_WEBHOOK_URL" ] && exit 0
+          curl -s -X POST "$SLACK_WEBHOOK_URL" \
+            -H "Content-Type: application/json" \
+            -d "{\"text\":\":white_check_mark: *netpaytool.com auto-healed* — was HTTP ${PRE_STATUS}, now 200. Zombie processes killed. <${RUN_URL}|View run>\"}"
+
+      - name: Slack alert (still down)
+        if: steps.health.outputs.healthy == 'false' && steps.verify.outputs.recovered == 'false'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          POST_STATUS: ${{ steps.verify.outputs.status }}
+        run: |
+          [ -z "$SLACK_WEBHOOK_URL" ] && exit 0
+          curl -s -X POST "$SLACK_WEBHOOK_URL" \
+            -H "Content-Type: application/json" \
+            -d "{\"text\":\":red_circle: *netpaytool.com still down* after auto-heal attempt. HTTP ${POST_STATUS}. Manual intervention needed. <${RUN_URL}|View run>\"}"
