@@ -80,7 +80,7 @@ export default function Home() {
       <main className="max-w-2xl mx-auto px-4 py-10 flex-1">
         {/* Hero */}
         <div className="mb-8 text-center">
-          <h1 className="font-black mb-3 leading-tight" style={{ fontSize: "clamp(28px, 6vw, 42px)" }}>
+          <h1 className="font-display mb-4 leading-[1.1]" style={{ fontSize: "clamp(2rem, 8vw, 3.5rem)" }}>
             Take-Home Pay
             <br />
             <span className="text-gradient-1">Calculator</span>
