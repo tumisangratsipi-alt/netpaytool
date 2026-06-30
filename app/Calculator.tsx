@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   calculateTax,
   getNetForPeriod,
@@ -211,6 +211,35 @@ function AffiliateCTA({ route }: { route: NetPayRouteResult }) {
   );
 }
 
+function LiveRateContext() {
+  const [data, setData] = useState<{ treasuryYield: number; inflationRate: number } | null>(null);
+  useEffect(() => {
+    fetch("https://calcmoney.io/api/market-pulse")
+      .then((r) => r.json())
+      .then((d) => { if (d?.treasuryYield) setData({ treasuryYield: d.treasuryYield, inflationRate: d.inflationRate }); })
+      .catch(() => {});
+  }, []);
+  if (!data) return null;
+  const hysa = Math.max(data.treasuryYield - 0.15, 4.5);
+  return (
+    <div className="mb-5 rounded-lg px-4 py-2.5 flex flex-wrap items-center gap-x-5 gap-y-1.5 text-[11px] font-mono" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
+      <span className="flex items-center gap-1.5" style={{ color: "rgba(255,255,255,0.35)" }}>
+        <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#4ADE80", display: "inline-block", boxShadow: "0 0 4px #4ADE80" }} />
+        LIVE
+      </span>
+      <span style={{ color: "rgba(255,255,255,0.5)" }}>
+        10Y yield <span style={{ color: "#4ADE80" }}>{data.treasuryYield.toFixed(2)}%</span>
+      </span>
+      <span style={{ color: "rgba(255,255,255,0.5)" }}>
+        HYSA <span style={{ color: "#4ADE80" }}>~{hysa.toFixed(1)}%</span> APY
+      </span>
+      <span style={{ color: "rgba(255,255,255,0.4)", fontSize: 10 }}>
+        CPI {data.inflationRate.toFixed(1)}% — every after-tax dollar matters
+      </span>
+    </div>
+  );
+}
+
 export default function Calculator({
   defaultSalary,
   defaultState,
@@ -279,7 +308,18 @@ export default function Calculator({
 
   return (
     <div>
+      <LiveRateContext />
       <div className="aura-panel p-6">
+        <div className="flex items-center justify-between pb-4 mb-5" style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
+          <span className="text-[10px] font-mono font-bold uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.45)" }}>
+            Take-Home Pay Calculator
+          </span>
+          <span className="inline-flex items-center gap-1 text-[8px] font-mono tracking-wide rounded px-1.5 py-0.5"
+            style={{ color: "var(--color-accent)", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)" }}>
+            <span style={{ width: 4, height: 4, borderRadius: "50%", background: "var(--color-accent)", display: "inline-block" }} />
+            Live data
+          </span>
+        </div>
         <div className="space-y-5">
 
           <div>
