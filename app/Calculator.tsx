@@ -151,13 +151,13 @@ function ResultCard({ result, period }: { result: ReturnType<typeof calculateTax
 
       <div className="mt-6 space-y-3">
         <a
-          href="https://calcmoney.io/calculators/salary-to-hourly"
+          href="https://calcmoney.io/calculators/net-worth"
           target="_blank"
           rel="noopener noreferrer"
-          className="block w-full text-center py-3 rounded-lg font-bold text-sm transition-[background-color,transform] duration-150 ease-out"
-          style={{ background: "rgba(34,197,94,0.12)", color: "#22C55E", border: "1px solid rgba(34,197,94,0.3)", textDecoration: "none" }}
+          className="btn-orbital block w-full text-center py-3"
+          style={{ textDecoration: "none" }}
         >
-          Full salary &rarr; hourly &rarr; net pay breakdown at CalcMoney &rarr;
+          Build wealth from {formatCurrencyFull(result.netAnnual)} net: investment and net worth tools at CalcMoney &rarr;
         </a>
 
         <div className="pt-3 border-t" style={{ borderColor: "var(--border-default, rgba(255,255,255,0.06))" }}>
