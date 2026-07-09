@@ -50,6 +50,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const adsenseId = process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID;
+  const ga4Id = process.env.NEXT_PUBLIC_GA4_ID || 'G-PDXEK5JF9E';
   return (
     <html lang="en" className={`${clashDisplay.variable} ${plusJakartaSans.variable}`}>
       <head>
@@ -65,12 +66,12 @@ export default function RootLayout({
             crossOrigin="anonymous"
           />
         )}
-        <Script src="https://www.googletagmanager.com/gtag/js?id=G-PDXEK5JF9E" strategy="afterInteractive" />
+        <Script src={`https://www.googletagmanager.com/gtag/js?id=${ga4Id}`} strategy="afterInteractive" />
         <Script id="ga4-init" strategy="afterInteractive">{`
           window.dataLayer=window.dataLayer||[];
           function gtag(){dataLayer.push(arguments);}
           gtag('js',new Date());
-          gtag('config','G-PDXEK5JF9E',{page_path:window.location.pathname});
+          gtag('config','${ga4Id}',{page_path:window.location.pathname});
         `}</Script>
       </body>
     </html>
