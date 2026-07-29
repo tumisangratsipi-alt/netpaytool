@@ -44,6 +44,7 @@ export const metadata: Metadata = {
   },
   other: {
     "verify-admitad": "f3cbbb8de0",
+    "mitgo-verification": "553e14ac-84bc-46e2-b4ac-4b3a4d4655e5",
   },
 };
 
