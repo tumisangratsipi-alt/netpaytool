@@ -21,7 +21,7 @@ export default function MethodologyPage() {
             <img src="/logo.png" alt="NetPayTool logo" style={{ height: "28px", width: "auto" }} />
             <span className="text-gradient-1">netpay</span>tool.com
           </Link>
-          <span className="text-xs" style={{ color: "var(--text-muted)" }}>2025 IRS Tax Brackets</span>
+          <span className="text-xs" style={{ color: "var(--text-muted)" }}>2026 IRS Tax Brackets</span>
         </div>
       </header>
 
@@ -36,13 +36,13 @@ export default function MethodologyPage() {
         <div className="space-y-8 text-sm leading-relaxed" style={{ color: "var(--text-muted)" }}>
           <section>
             <h2 className="text-lg font-bold mb-3" style={{ color: "var(--text)" }}>Federal income tax</h2>
-            <p>We use the 2025 IRS federal income tax brackets (Rev. Proc. 2024-61) and apply the standard deduction before calculating tax: $15,000 for single filers, $30,000 for married filing jointly, and $22,500 for head of household. The standard deduction is taken before applying brackets, the same method used on Form 1040.</p>
+            <p>We use the 2026 IRS federal income tax brackets (Rev. Proc. 2025-32) and apply the standard deduction before calculating tax: $16,100 for single filers, $32,200 for married filing jointly, and $24,150 for head of household. The standard deduction is taken before applying brackets, the same method used on Form 1040.</p>
             <p className="mt-3">Tax is calculated progressively across each bracket. Only income in each bracket is taxed at that bracket&apos;s rate.</p>
           </section>
 
           <section>
             <h2 className="text-lg font-bold mb-3" style={{ color: "var(--text)" }}>FICA taxes</h2>
-            <p>Social Security is 6.2% on wages up to $176,100 (2025 wage base). Medicare is 1.45% on all wages, plus an additional 0.9% on wages over $200,000 (single) or $250,000 (married filing jointly), the Additional Medicare Tax under the ACA.</p>
+            <p>Social Security is 6.2% on wages up to $184,500 (2026 wage base). Medicare is 1.45% on all wages, plus an additional 0.9% on wages over $200,000 (single) or $250,000 (married filing jointly), the Additional Medicare Tax under the ACA.</p>
           </section>
 
           <section>
@@ -77,7 +77,7 @@ export default function MethodologyPage() {
       <footer className="mt-16 border-t" style={{ borderColor: "var(--border)" }}>
         <div className="max-w-2xl mx-auto px-4 py-8 text-sm" style={{ color: "var(--text-muted)" }}>
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-            <p>2025 IRS federal tax brackets.</p>
+            <p>2026 IRS federal tax brackets.</p>
             <p>More tools at{" "}
               <a href="https://calcmoney.io" target="_blank" rel="noopener noreferrer" style={{ color: "#22C55E", textDecoration: "none" }}>CalcMoney.io</a>
             </p>

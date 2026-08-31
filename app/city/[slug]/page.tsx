@@ -179,7 +179,7 @@ export default async function CityPayPage({ params }: { params: Promise<{ slug: 
             </table>
           </div>
           <p className="text-xs mt-3" style={{ color: "var(--text-muted)" }}>
-            Single filer, standard deduction, 2025 tax year. Federal + {city.state} state taxes + FICA.
+            Single filer, standard deduction, 2026 tax year. Federal + {city.state} state taxes + FICA.
           </p>
         </div>
 

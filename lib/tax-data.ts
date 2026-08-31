@@ -1,6 +1,24 @@
-// US Federal & State Tax Data — 2025 tax year
-// Federal brackets: IRS Rev. Proc. 2024-61
-// State rates: state revenue department publications
+// US Federal & State Tax Data — 2026 tax year
+// Federal brackets: IRS Rev. Proc. 2025-32 (published Oct 9, 2025),
+// https://www.irs.gov/pub/irs-drop/rp-25-32.pdf, Section 4 tax rate
+// tables. Every bracket threshold below was cross-verified against the
+// Rev Proc's own stated cumulative-tax dollar amounts at each threshold
+// (e.g. "$2,480 plus 12% of the excess over $24,800" for MFJ) before
+// being trusted, not just read off the table once.
+//
+// Audited 2026-08-31, corrected from a prior version of this file that
+// was one full tax year stale (2025 brackets, shown as current on a
+// live paycheck calculator) AND mis-cited its own source (labeled
+// "Rev. Proc. 2024-61", which doesn't exist — the real 2025-vintage
+// citation is Rev. Proc. 2024-40). The 2025 standard deduction figures
+// that prior version used were also superseded mid-year by the One,
+// Big, Beautiful Bill Act (OBBBA), which retroactively raised the 2025
+// standard deduction (to $15,750 single / $31,500 MFJ / $23,625 HOH)
+// before the 2026 figures below took effect — so the old numbers were
+// wrong for 2025 by the time this was caught, not just outdated.
+//
+// State rates: Tax Foundation 2024 data (unaudited in this pass — see
+// STATE_TAX_RATES comment below).
 
 export type FilingStatus = "single" | "married" | "hoh";
 export type PayPeriod = "weekly" | "biweekly" | "semimonthly" | "monthly" | "annual";
@@ -21,48 +39,50 @@ export const PAY_PERIOD_DIVISOR: Record<PayPeriod, number> = {
   annual: 1,
 };
 
-// Standard deductions 2025
+// Standard deductions 2026 (Rev. Proc. 2025-32, Sec. 4.14)
 export const STANDARD_DEDUCTION: Record<FilingStatus, number> = {
-  single: 15000,
-  married: 30000,
-  hoh: 22500,
+  single: 16100,
+  married: 32200,
+  hoh: 24150,
 };
 
-// Federal income tax brackets 2025 (IRS Rev. Proc. 2024-61)
+// Federal income tax brackets 2026 (IRS Rev. Proc. 2025-32, Sec. 4.01)
 export const FEDERAL_BRACKETS: Record<FilingStatus, [number, number, number][]> = {
   // [min, max, rate]
   single: [
-    [0, 11925, 0.10],
-    [11925, 48475, 0.12],
-    [48475, 103350, 0.22],
-    [103350, 197300, 0.24],
-    [197300, 250525, 0.32],
-    [250525, 626350, 0.35],
-    [626350, Infinity, 0.37],
+    [0, 12400, 0.10],
+    [12400, 50400, 0.12],
+    [50400, 105700, 0.22],
+    [105700, 201775, 0.24],
+    [201775, 256225, 0.32],
+    [256225, 640600, 0.35],
+    [640600, Infinity, 0.37],
   ],
   married: [
-    [0, 23850, 0.10],
-    [23850, 96950, 0.12],
-    [96950, 206700, 0.22],
-    [206700, 394600, 0.24],
-    [394600, 501050, 0.32],
-    [501050, 751600, 0.35],
-    [751600, Infinity, 0.37],
+    [0, 24800, 0.10],
+    [24800, 100800, 0.12],
+    [100800, 211400, 0.22],
+    [211400, 403550, 0.24],
+    [403550, 512450, 0.32],
+    [512450, 768700, 0.35],
+    [768700, Infinity, 0.37],
   ],
   hoh: [
-    [0, 17000, 0.10],
-    [17000, 64850, 0.12],
-    [64850, 103350, 0.22],
-    [103350, 197300, 0.24],
-    [197300, 250500, 0.32],
-    [250500, 626350, 0.35],
-    [626350, Infinity, 0.37],
+    [0, 17700, 0.10],
+    [17700, 67450, 0.12],
+    [67450, 105700, 0.22],
+    [105700, 201750, 0.24],
+    [201750, 256200, 0.32],
+    [256200, 640600, 0.35],
+    [640600, Infinity, 0.37],
   ],
 };
 
-// FICA 2025
+// FICA 2026. Wage base: SSA announcement, Oct 24, 2025 ($184,500, up
+// from $176,100 in 2025). Medicare rate/surtax thresholds are set by
+// statute (ACA), not indexed annually — unchanged.
 export const SOCIAL_SECURITY_RATE = 0.062;
-export const SOCIAL_SECURITY_WAGE_BASE = 176100;
+export const SOCIAL_SECURITY_WAGE_BASE = 184500;
 export const MEDICARE_RATE = 0.0145;
 export const MEDICARE_SURTAX_RATE = 0.009;
 export const MEDICARE_SURTAX_THRESHOLD_SINGLE = 200000;
@@ -70,7 +90,11 @@ export const MEDICARE_SURTAX_THRESHOLD_MARRIED = 250000;
 
 // State income tax — effective rates for all 50 states + DC
 // No-tax states = 0. Others use simplified effective rate for median earner.
-// Source: Tax Foundation 2024 State Individual Income Tax Rates
+// Source: Tax Foundation 2024 State Individual Income Tax Rates.
+// NOT re-audited in the 2026-08-31 federal-bracket fix above — this is
+// two years stale on its own vintage, and several states (e.g. Georgia,
+// Iowa, Mississippi) have had real flat-tax-transition rate cuts since
+// 2024 that these numbers don't reflect. Flagged, not yet corrected.
 export const STATE_TAX_RATES: Record<string, number> = {
   AL: 0.045, AK: 0, AZ: 0.025, AR: 0.047, CA: 0.093,
   CO: 0.044, CT: 0.065, DE: 0.066, FL: 0, GA: 0.055,

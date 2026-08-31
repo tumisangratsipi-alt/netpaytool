@@ -3,6 +3,7 @@ import Calculator from "@/app/Calculator";
 import {
   STATE_NAMES,
   STATE_TAX_RATES,
+  STANDARD_DEDUCTION,
   calculateTax,
   getNetForPeriod,
   formatCurrencyFull,
@@ -183,7 +184,7 @@ export default async function SalaryStatePage({
         name: `How much federal income tax do you pay on ${gross} in ${name}?`,
         acceptedAnswer: {
           "@type": "Answer",
-          text: `On a ${gross} salary, a single filer pays approximately ${formatCurrencyFull(single.federalTax)} in federal income tax, an effective federal rate of ${formatPercent(single.effectiveFederalRate)}. Married filers pay ${formatCurrencyFull(married.federalTax)} due to the higher standard deduction of $30,000 (2025).`,
+          text: `On a ${gross} salary, a single filer pays approximately ${formatCurrencyFull(single.federalTax)} in federal income tax, an effective federal rate of ${formatPercent(single.effectiveFederalRate)}. Married filers pay ${formatCurrencyFull(married.federalTax)} due to the higher standard deduction of ${formatCurrencyFull(STANDARD_DEDUCTION.married)} (2026).`,
         },
       },
       {
@@ -227,7 +228,7 @@ export default async function SalaryStatePage({
             <span className="text-gradient-1">net</span>paytool.com
           </a>
           <span className="text-xs" style={{ color: "var(--text-muted)" }}>
-            IRS 2025 Tax Data
+            IRS 2026 Tax Data
           </span>
         </div>
       </header>
@@ -329,7 +330,7 @@ export default async function SalaryStatePage({
             </table>
           </div>
           <p className="text-xs mt-2" style={{ color: "var(--text-muted)" }}>
-            Based on IRS 2025 tax brackets and standard deductions. State tax calculated at the {name} effective rate of {hasStateTax ? formatPercent(stateRate) : "0% (no state income tax)"}.
+            Based on IRS 2026 tax brackets and standard deductions. State tax calculated at the {name} effective rate of {hasStateTax ? formatPercent(stateRate) : "0% (no state income tax)"}.
           </p>
         </section>
 
@@ -366,7 +367,7 @@ export default async function SalaryStatePage({
               },
               {
                 q: `How much federal income tax do you pay on ${gross} in ${name}?`,
-                a: `On a ${gross} salary, a single filer pays ${formatCurrencyFull(single.federalTax)} in federal income tax, an effective federal rate of ${formatPercent(single.effectiveFederalRate)}. Married filers pay ${formatCurrencyFull(married.federalTax)} because the married standard deduction is $30,000 versus $15,000 for single filers (2025).`,
+                a: `On a ${gross} salary, a single filer pays ${formatCurrencyFull(single.federalTax)} in federal income tax, an effective federal rate of ${formatPercent(single.effectiveFederalRate)}. Married filers pay ${formatCurrencyFull(married.federalTax)} because the married standard deduction is ${formatCurrencyFull(STANDARD_DEDUCTION.married)} versus ${formatCurrencyFull(STANDARD_DEDUCTION.single)} for single filers (2026).`,
               },
               {
                 q: `Does ${name} have state income tax on a ${gross} salary?`,
@@ -376,7 +377,7 @@ export default async function SalaryStatePage({
               },
               {
                 q: `What is the effective tax rate on ${gross} in ${name}?`,
-                a: `The total effective tax rate on a ${gross} salary in ${name} is ${formatPercent(single.effectiveTotalRate)} for a single filer. This includes ${formatPercent(single.effectiveFederalRate)} federal income tax, ${hasStateTax ? `${formatPercent(stateRate)} ${name} state income tax, ` : `0% state income tax, `}6.2% Social Security on wages up to $176,100, and 1.45% Medicare.`,
+                a: `The total effective tax rate on a ${gross} salary in ${name} is ${formatPercent(single.effectiveTotalRate)} for a single filer. This includes ${formatPercent(single.effectiveFederalRate)} federal income tax, ${hasStateTax ? `${formatPercent(stateRate)} ${name} state income tax, ` : `0% state income tax, `}6.2% Social Security on wages up to $184,500, and 1.45% Medicare.`,
               },
             ].map((item, i) => (
               <div key={i} className="aura-panel p-5">
@@ -449,7 +450,7 @@ export default async function SalaryStatePage({
         <div className="max-w-2xl mx-auto px-4 py-8 text-sm" style={{ color: "var(--text-muted)" }}>
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <p>
-              Data: IRS 2025 tax brackets.{" "}
+              Data: IRS 2026 tax brackets.{" "}
               <a href="/methodology" style={{ color: "var(--amber-500)", textDecoration: "none" }}>
                 Methodology &rarr;
               </a>
