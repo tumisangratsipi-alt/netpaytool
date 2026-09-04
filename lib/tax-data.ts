@@ -17,8 +17,8 @@
 // before the 2026 figures below took effect — so the old numbers were
 // wrong for 2025 by the time this was caught, not just outdated.
 //
-// State rates: Tax Foundation 2024 data (unaudited in this pass — see
-// STATE_TAX_RATES comment below).
+// State rates: Tax Foundation 2026 data, audited 2026-09-04 — see
+// STATE_TAX_RATES comment below.
 
 export type FilingStatus = "single" | "married" | "hoh";
 export type PayPeriod = "weekly" | "biweekly" | "semimonthly" | "monthly" | "annual";
@@ -88,24 +88,50 @@ export const MEDICARE_SURTAX_RATE = 0.009;
 export const MEDICARE_SURTAX_THRESHOLD_SINGLE = 200000;
 export const MEDICARE_SURTAX_THRESHOLD_MARRIED = 250000;
 
-// State income tax — effective rates for all 50 states + DC
-// No-tax states = 0. Others use simplified effective rate for median earner.
-// Source: Tax Foundation 2024 State Individual Income Tax Rates.
-// NOT re-audited in the 2026-08-31 federal-bracket fix above — this is
-// two years stale on its own vintage, and several states (e.g. Georgia,
-// Iowa, Mississippi) have had real flat-tax-transition rate cuts since
-// 2024 that these numbers don't reflect. Flagged, not yet corrected.
+// State income tax — effective marginal rate at $100,000 single-filer
+// taxable income, for all 50 states + DC. No-tax states = 0. This is a
+// simplified single-rate model (one number per state, not a real bracket
+// calculation against the user's actual income), same approach the prior
+// version used — $100K was reverse-engineered as the reference income
+// that best reproduced the prior version's numbers before they went
+// stale, so this update keeps the same intent, just current data.
+//
+// Source: Tax Foundation, "2026 State Individual Income Tax Rates and
+// Brackets" (https://taxfoundation.org/data/all/state/state-income-tax-
+// rates-2026/), downloaded XLSX (2026-State-Individual-Income-Tax-Rates-
+// Brackets.xlsx), "2026" sheet. Full bracket schedules were parsed for
+// all 51 jurisdictions and the marginal rate at $100,000 taken directly
+// from each state's real 2026 bracket table — not read off a single
+// pre-summarized column.
+//
+// Washington is 0 here even though Tax Foundation's table lists a 7%/9%
+// rate for WA: that rate applies only to long-term capital gains over
+// $270K+, not wage/salary income, which is what this calculator computes
+// (confirmed via the table's own footnote). WA also has a separate 0.58%
+// payroll tax funding the WA Cares long-term-care program, withheld from
+// gross wages — not modeled here, consistent with this file not modeling
+// any other state's special payroll surcharges either.
+//
+// Audited 2026-09-04, replacing 2024-vintage data that the prior version
+// of this file itself already flagged as stale — several states (Georgia,
+// Iowa, Mississippi, and others) have had real rate cuts since 2024 that
+// the old numbers missed (Iowa's flat-tax transition alone dropped its
+// rate from 5.7% to 3.8%). Also found and fixed one apparent data error
+// in the old figures, not just staleness: Massachusetts was listed at
+// 9%, but MA's flat rate has been 5% since 2020, with its "millionaire's
+// tax" surtax only applying above $1,083,150 — nowhere close to the
+// $100K reference income this file uses.
 export const STATE_TAX_RATES: Record<string, number> = {
-  AL: 0.045, AK: 0, AZ: 0.025, AR: 0.047, CA: 0.093,
-  CO: 0.044, CT: 0.065, DE: 0.066, FL: 0, GA: 0.055,
-  HI: 0.079, ID: 0.058, IL: 0.0495, IN: 0.0305, IA: 0.057,
-  KS: 0.052, KY: 0.045, LA: 0.042, ME: 0.075, MD: 0.057,
-  MA: 0.09, MI: 0.0425, MN: 0.072, MS: 0.047, MO: 0.048,
-  MT: 0.059, NE: 0.052, NV: 0, NH: 0, NJ: 0.064,
-  NM: 0.049, NY: 0.0685, NC: 0.0475, ND: 0.025, OH: 0.035,
-  OK: 0.045, OR: 0.088, PA: 0.0307, RI: 0.055, SC: 0.065,
-  SD: 0, TN: 0, TX: 0, UT: 0.0485, VT: 0.066,
-  VA: 0.057, WA: 0, WV: 0.055, WI: 0.053, WY: 0,
+  AL: 0.05, AK: 0, AZ: 0.025, AR: 0.039, CA: 0.093,
+  CO: 0.044, CT: 0.06, DE: 0.066, FL: 0, GA: 0.0519,
+  HI: 0.076, ID: 0.053, IL: 0.0495, IN: 0.0295, IA: 0.038,
+  KS: 0.0558, KY: 0.035, LA: 0.03, ME: 0.0715, MD: 0.05,
+  MA: 0.05, MI: 0.0425, MN: 0.068, MS: 0.04, MO: 0.047,
+  MT: 0.0565, NE: 0.0455, NV: 0, NH: 0, NJ: 0.0637,
+  NM: 0.049, NY: 0.059, NC: 0.0399, ND: 0.0195, OH: 0.0275,
+  OK: 0.045, OR: 0.0875, PA: 0.0307, RI: 0.0475, SC: 0.06,
+  SD: 0, TN: 0, TX: 0, UT: 0.045, VT: 0.066,
+  VA: 0.0575, WA: 0, WV: 0.0482, WI: 0.053, WY: 0,
   DC: 0.085,
 };
 
