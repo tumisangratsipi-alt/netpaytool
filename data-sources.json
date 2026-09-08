@@ -1,0 +1,61 @@
+{
+  "_readme": "Provenance manifest for every hardcoded real-world fact in this repo's calculators. Each entry names the real external source, its real update cadence, when it was last verified against that source (by whom/what commit), whether an automated check exists, and that check's actual verified status. Update this file in the same commit as any data fix. Do not add an entry with a fabricated or unverified source - if a fact's real source hasn't been checked, mark automated_check.status as \"missing\" and last_verified.method as \"never independently verified\", don't invent a plausible-looking entry.",
+  "repo": "netpaytool",
+  "manifest_created": "2026-09-08",
+  "entries": [
+    {
+      "id": "federal-tax-data",
+      "file": "lib/tax-data.ts",
+      "fields": [
+        "STANDARD_DEDUCTION",
+        "FEDERAL_TAX_BRACKETS (single/married/hoh)",
+        "SOCIAL_SECURITY_WAGE_BASE",
+        "MEDICARE_RATE",
+        "MEDICARE_SURTAX_RATE",
+        "MEDICARE_SURTAX_THRESHOLD_SINGLE / MARRIED"
+      ],
+      "description": "Federal income tax brackets, standard deduction, and FICA figures used by the take-home pay calculator.",
+      "real_source": {
+        "name": "IRS Rev. Proc. 2025-32 (federal brackets/deduction) + SSA wage base announcement (Oct 24, 2025)",
+        "url": "https://www.irs.gov/pub/irs-drop/rp-25-32.pdf",
+        "real_cadence": "annual - IRS typically publishes the following tax year's figures in October/November; SSA wage base announced around the same time"
+      },
+      "last_verified": {
+        "date": "2026-08-31",
+        "commit": "048c2e2",
+        "method": "manual audit - downloaded the real Rev. Proc. PDF, cross-verified every bracket threshold against the document's own stated cumulative-tax dollar amounts before trusting it"
+      },
+      "automated_check": {
+        "exists": true,
+        "workflow": ".github/workflows/update-data.yml",
+        "status_verified_on": "2026-09-08",
+        "status": "working",
+        "behavior": "Scrapes the IRS newsroom page for the target tax year, falls back to CPI-based estimation if the page is unpublished or unparseable, sends a Slack alert if both fail. Auto-commits only on a genuine parsed/estimated change.",
+        "known_gaps": "Compares the file's own year header to the current calendar year, so it won't attempt to fetch next year's real IRS data until the calendar rolls over in January - misses the real Oct-Dec publication window by roughly 2-3 months. Worth changing to check in October regardless of calendar year. Also does not cover STATE_TAX_RATES in the same file (see next entry) - the workflow's git-diff check watches the whole file, but the update script itself only ever touches the federal bracket/deduction section."
+      },
+      "next_check_due": "2026-10-01"
+    },
+    {
+      "id": "state-tax-rates",
+      "file": "lib/tax-data.ts",
+      "fields": ["STATE_TAX_RATES"],
+      "description": "Simplified single effective marginal rate per state (at $100,000 single-filer taxable income, reverse-engineered as the reference income that matched this file's pre-existing methodology), used as a proxy since this calculator doesn't model full state bracket schedules.",
+      "real_source": {
+        "name": "Tax Foundation, \"2026 State Individual Income Tax Rates and Brackets\"",
+        "url": "https://taxfoundation.org/data/all/state/state-income-tax-rates-2026/",
+        "real_cadence": "annual, typically published early in the calendar year for that year"
+      },
+      "last_verified": {
+        "date": "2026-09-04",
+        "commit": "3bff8af",
+        "method": "manual audit - downloaded Tax Foundation's real XLSX bracket dataset, parsed full bracket schedules for all 51 jurisdictions, computed the real marginal rate at $100K for each"
+      },
+      "automated_check": {
+        "exists": false,
+        "status": "missing",
+        "note": "The existing update-data.yml workflow watches lib/tax-data.ts for diffs but its script never touches this section - a real state-level rate change would go completely undetected. Needs its own check step, or the existing script extended to also re-derive this table annually."
+      },
+      "next_check_due": "2027-02-01"
+    }
+  ]
+}
