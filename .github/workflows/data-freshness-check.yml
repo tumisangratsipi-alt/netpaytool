@@ -1,0 +1,57 @@
+name: Data Freshness Check
+
+# Reads data-sources.json and Slack-alerts when a real-world data source
+# is due for a re-check, or was never independently audited in the first
+# place. This is a reminder, not an auto-fetch - it never edits the real
+# data files, it only tells a human when to look. This entry's own
+# federal-tax-data watcher (update-data.yml) does the actual live source
+# check for the fields it covers; this job is the backstop for that entry
+# plus every entry (like state-tax-rates) that has no such live watcher.
+
+on:
+  schedule:
+    # Monthly, well inside the tightest real cadence (annual) tracked
+    # by any entry in this repo's manifest.
+    - cron: '0 9 1 * *'
+  workflow_dispatch:
+
+jobs:
+  check-freshness:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run freshness check
+        run: python scripts/check-data-freshness.py
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          REPO_NAME: netpaytool
+
+      - name: Check for state file changes
+        id: diff
+        run: |
+          if git diff --quiet .data-freshness-state.json 2>/dev/null; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit alert state
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          git config user.name "data-bot"
+          git config user.email "data-bot@netpaytool.com"
+          git add .data-freshness-state.json
+          git commit -m "chore: record data freshness alert state"
+          git push

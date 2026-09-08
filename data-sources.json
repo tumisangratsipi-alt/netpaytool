@@ -31,7 +31,8 @@
         "status_verified_on": "2026-09-08",
         "status": "working",
         "behavior": "Scrapes the IRS newsroom page for the target tax year, falls back to CPI-based estimation if the page is unpublished or unparseable, sends a Slack alert if both fail. Auto-commits only on a genuine parsed/estimated change.",
-        "known_gaps": "Compares the file's own year header to the current calendar year, so it won't attempt to fetch next year's real IRS data until the calendar rolls over in January - misses the real Oct-Dec publication window by roughly 2-3 months. Worth changing to check in October regardless of calendar year. Also does not cover STATE_TAX_RATES in the same file (see next entry) - the workflow's git-diff check watches the whole file, but the update script itself only ever touches the federal bracket/deduction section."
+        "known_gaps": "Compares the file's own year header to the current calendar year, so it won't attempt to fetch next year's real IRS data until the calendar rolls over in January - misses the real Oct-Dec publication window by roughly 2-3 months. Worth changing to check in October regardless of calendar year. Also does not cover STATE_TAX_RATES in the same file (see next entry) - the workflow's git-diff check watches the whole file, but the update script itself only ever touches the federal bracket/deduction section.",
+        "backstop": "Also covered by the generic .github/workflows/data-freshness-check.yml (added 2026-09-08), which Slack-alerts if next_check_due passes without this entry being re-verified - a second-layer reminder in case the live scrape above ever fails silently."
       },
       "next_check_due": "2026-10-01"
     },
@@ -51,9 +52,11 @@
         "method": "manual audit - downloaded Tax Foundation's real XLSX bracket dataset, parsed full bracket schedules for all 51 jurisdictions, computed the real marginal rate at $100K for each"
       },
       "automated_check": {
-        "exists": false,
-        "status": "missing",
-        "note": "The existing update-data.yml workflow watches lib/tax-data.ts for diffs but its script never touches this section - a real state-level rate change would go completely undetected. Needs its own check step, or the existing script extended to also re-derive this table annually."
+        "exists": true,
+        "workflow": ".github/workflows/data-freshness-check.yml",
+        "status_verified_on": "2026-09-08",
+        "status": "reminder-only",
+        "note": "The existing update-data.yml workflow watches lib/tax-data.ts for diffs but its script never touches this section - a real state-level rate change would go completely undetected there. As of 2026-09-08, the generic data-freshness-check.yml job Slack-alerts once next_check_due passes, but it does not fetch or verify Tax Foundation's real data itself - someone still has to re-run the manual audit. A real live check (like the federal-tax-data entry has) has not been built for this table."
       },
       "next_check_due": "2027-02-01"
     }
