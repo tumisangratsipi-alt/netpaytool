@@ -17,6 +17,10 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   display: "swap",
 });
 
+// Public publisher ID (also listed in public/ads.txt). Hardcoded as the fallback
+// so the ad script does not silently vanish when the env var is unset.
+const ADSENSE_PUBLISHER_ID = "ca-pub-1046440660422479";
+
 export const metadata: Metadata = {
   title: "Take-Home Pay Calculator — Net Pay After Taxes",
   description:
@@ -43,17 +47,24 @@ export const metadata: Metadata = {
     google: "_KltCpzlVEgeRJqOA0WosRMxk_eDtrgw3N5tVgzY-30",
   },
   other: {
+    "google-adsense-account": ADSENSE_PUBLISHER_ID,
     "verify-admitad": "f3cbbb8de0",
     "mitgo-verification": "553e14ac-84bc-46e2-b4ac-4b3a4d4655e5",
   },
 };
+
+// Prerendered HTML otherwise ships with s-maxage=31536000. The CDN then keeps a
+// copy across deploys that points at _next/static chunks that no longer exist,
+// so the page never hydrates and the AdSense and GA scripts never run. One hour
+// bounds how long a stale copy can live. Still clear the CDN cache after deploys.
+export const revalidate = 3600;
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const adsenseId = process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID;
+  const adsenseId = process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID || ADSENSE_PUBLISHER_ID;
   const ga4Id = process.env.NEXT_PUBLIC_GA4_ID || 'G-PDXEK5JF9E';
   return (
     <html lang="en" className={`${clashDisplay.variable} ${plusJakartaSans.variable}`}>
