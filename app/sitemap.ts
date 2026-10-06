@@ -1,6 +1,19 @@
 import type { MetadataRoute } from "next";
 import { STATE_NAMES } from "@/lib/tax-data";
 import { CITY_SLUGS } from "@/lib/city-data";
+import dataSources from "@/data-sources.json";
+
+// Pages change when their data does. data-sources.json records when each
+// dataset was last verified, so the newest of those dates is an honest
+// lastModified (a new Date() here told Google every page changed daily).
+const CONTENT_UPDATED = new Date(
+  dataSources.entries
+    .map((entry) => entry.last_verified?.date)
+    .filter((date): date is string => Boolean(date))
+    .sort()
+    .pop() ?? "2026-09-01"
+);
+
 
 const SALARY_TIERS = [
   30000, 40000, 45000, 50000, 55000, 60000, 65000, 70000, 75000,
@@ -14,7 +27,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     for (const code of Object.keys(STATE_NAMES)) {
       salaryStatePages.push({
         url: `https://netpaytool.com/${salary}/${code.toLowerCase()}`,
-        lastModified: new Date(),
+        lastModified: CONTENT_UPDATED,
         changeFrequency: "yearly" as const,
         priority: 0.8,
       });
@@ -23,7 +36,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const cityPages: MetadataRoute.Sitemap = CITY_SLUGS.map((slug) => ({
     url: `https://netpaytool.com/city/${slug}`,
-    lastModified: new Date(),
+    lastModified: CONTENT_UPDATED,
     changeFrequency: "yearly" as const,
     priority: 0.8,
   }));
@@ -31,13 +44,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
       url: "https://netpaytool.com",
-      lastModified: new Date(),
+      lastModified: CONTENT_UPDATED,
       changeFrequency: "monthly",
       priority: 1,
     },
     {
       url: "https://netpaytool.com/methodology",
-      lastModified: new Date(),
+      lastModified: CONTENT_UPDATED,
       changeFrequency: "yearly",
       priority: 0.5,
     },
