@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { STATE_NAMES } from "@/lib/tax-data";
-import { CITY_SLUGS } from "@/lib/city-data";
+import { LOCAL_TAX_CITY_SLUGS } from "@/lib/city-data";
 import dataSources from "@/data-sources.json";
 
 // Pages change when their data does. data-sources.json records when each
@@ -34,7 +34,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   }
 
-  const cityPages: MetadataRoute.Sitemap = CITY_SLUGS.map((slug) => ({
+  const cityPages: MetadataRoute.Sitemap = LOCAL_TAX_CITY_SLUGS.map((slug) => ({
     url: `https://netpaytool.com/city/${slug}`,
     lastModified: CONTENT_UPDATED,
     changeFrequency: "yearly" as const,

@@ -1303,3 +1303,7 @@ export const CITY_DATA: Record<string, CityData> = {
 };
 
 export const CITY_SLUGS = Object.keys(CITY_DATA);
+
+// Only these cities get their own page: everywhere else take-home pay is the
+// state's, so the city page would repeat a /[salary]/[state] page.
+export const LOCAL_TAX_CITY_SLUGS = CITY_SLUGS.filter((slug) => CITY_DATA[slug].localIncomeTax);

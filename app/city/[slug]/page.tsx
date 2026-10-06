@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import Calculator from "@/app/Calculator";
-import { CITY_DATA, CITY_SLUGS } from "@/lib/city-data";
+import { CITY_DATA, LOCAL_TAX_CITY_SLUGS, type CityData } from "@/lib/city-data";
+import { nearestSalaryTier } from "@/lib/salary-tiers";
 import {
   calculateTax,
   getNetForPeriod,
@@ -12,7 +13,16 @@ import {
 export const dynamic = "force-static";
 
 export function generateStaticParams() {
-  return CITY_SLUGS.map((slug) => ({ slug }));
+  return LOCAL_TAX_CITY_SLUGS.map((slug) => ({ slug }));
+}
+
+// Retired 2026-10-06: a city with no local income tax has the same take-home
+// pay as its state (the page itself said so), which made 171 of the 181 city
+// pages repeats. Those URLs now go to the state page at the nearest salary.
+function redirectIfNoLocalTax(city: CityData) {
+  if (!city.localIncomeTax) {
+    permanentRedirect(`/${nearestSalaryTier(city.medianSalary)}/${city.stateCode.toLowerCase()}`);
+  }
 }
 
 export async function generateMetadata({
@@ -23,6 +33,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const city = CITY_DATA[slug];
   if (!city) return {};
+  redirectIfNoLocalTax(city);
 
   const result = calculateTax(city.medianSalary, "single", city.stateCode);
   const takeHome = formatCurrencyFull(result.netAnnual);
@@ -87,6 +98,7 @@ export default async function CityPayPage({ params }: { params: Promise<{ slug: 
   const { slug } = await params;
   const city = CITY_DATA[slug];
   if (!city) notFound();
+  redirectIfNoLocalTax(city);
 
   const faqs = buildFaqs(city);
   const salaryTiers = getSalaryTiers(city.medianSalary);
@@ -224,7 +236,7 @@ export default async function CityPayPage({ params }: { params: Promise<{ slug: 
         <section className="mb-10">
           <h2 className="text-lg font-bold mb-4">Other cities</h2>
           <div className="grid grid-cols-2 gap-2">
-            {CITY_SLUGS.filter((s) => s !== slug).slice(0, 8).map((s) => {
+            {LOCAL_TAX_CITY_SLUGS.filter((s) => s !== slug).slice(0, 8).map((s) => {
               const c = CITY_DATA[s];
               return (
                 <a key={s} href={`/city/${s}`} className="aura-panel px-4 py-3 text-sm font-medium" style={{ textDecoration: "none", color: "var(--text-primary)" }}>

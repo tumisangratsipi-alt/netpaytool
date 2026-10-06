@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SALARY_TIERS } from "@/lib/salary-tiers";
 import Calculator from "@/app/Calculator";
 import {
   STATE_NAMES,
@@ -12,12 +13,6 @@ import {
 
 export const dynamic = "force-static";
 
-// The 20 salary tiers this route covers
-const SALARY_TIERS = [
-  30000, 40000, 45000, 50000, 55000, 60000, 65000, 70000, 75000,
-  80000, 90000, 100000, 110000, 120000, 130000, 150000, 175000,
-  200000, 250000, 300000,
-];
 
 // Slug → number: "75000" → 75000
 function parseSalarySlug(slug: string): number | null {
