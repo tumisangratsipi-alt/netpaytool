@@ -1,22 +1,33 @@
 # netpaytool.com
-> Free take-home pay calculator. See your exact net pay after federal, state, and FICA taxes.
+> Free take-home pay calculator. See your net pay after federal, state and FICA taxes, on 2026 tax law.
 
 ## What this tool does
-- Calculates net take-home pay after all taxes for any US salary
+- Calculates annual and per-pay-period net pay for a US salary, for single, married filing jointly and head of household filers
 - Covers all 50 states plus DC
-- Applies 2025 IRS federal income tax brackets
-- Includes FICA (Social Security 6.2% + Medicare 1.45%)
-- Accounts for state income tax rates by state
-- Shows effective vs marginal tax rate
+- Applies the 2026 federal income tax brackets (10%, 12%, 22%, 24%, 32%, 35%, 37%) after the standard deduction
+- Includes FICA: Social Security 6.2% up to the $184,500 wage base, Medicare 1.45%, and the 0.9% additional Medicare tax over $200,000 (single) or $250,000 (married)
+- Applies one effective income tax rate per state
+- Shows effective and marginal tax rates
 
-## How taxes are calculated
-Federal tax uses 2025 IRS brackets (10%, 12%, 22%, 24%, 32%, 35%, 37%) per IRS Rev. Proc. 2024-61. State tax uses each state's 2025 effective rate or bracket structure. FICA is applied at the statutory rates. Standard deduction ($15,000 single / $30,000 married) applied by default.
+## Data sources
+- Federal brackets and standard deduction: IRS Rev. Proc. 2025-32 (tax year 2026)
+- Social Security wage base: Social Security Administration announcement of October 24, 2025 ($184,500 for 2026)
+- State income tax: Tax Foundation, "2026 State Individual Income Tax Rates and Brackets". Each state is reduced to a single effective rate, measured at $100,000 of single-filer taxable income, so results for states with graduated brackets are estimates
+- Not modeled: local city and county income taxes in the net pay result, pre-tax deductions such as 401(k) and health insurance, and W-4 withholding choices
 
-## Key facts
-- On a $75,000 salary in California, take-home pay is approximately $54,000/year after all taxes
-- On a $75,000 salary in Texas (no state income tax), take-home pay is approximately $61,000/year
-- FICA taxes alone take ~7.65% of gross income up to the Social Security wage base ($176,100 in 2025)
-- The highest combined marginal rate (federal + state + FICA) is roughly 55% in California at top incomes
+## Key facts (computed by this calculator, single filer)
+- $75,000 salary in California: about $54,600 a year after tax
+- $75,000 salary in Texas, which has no state income tax: about $61,600 a year after tax
+- 2026 standard deduction: $16,100 single, $32,200 married filing jointly, $24,150 head of household
+- Social Security tax stops at $184,500 of wages; Medicare tax applies to all wages
+
+## Page types
+- Salary and state pages: https://netpaytool.com/{salary}/{state-code} (20 salary levels from $30,000 to $300,000, for each state and DC; example /75000/ca)
+- City pages: https://netpaytool.com/city/{slug} for 10 cities that levy a local income tax, showing the local rate (example /city/columbus-oh)
+- Methodology: https://netpaytool.com/methodology
+
+## Not supported
+The calculator does not accept URL parameters. Link to the page for the salary and state you mean.
 
 ## Tool URL
 https://netpaytool.com
