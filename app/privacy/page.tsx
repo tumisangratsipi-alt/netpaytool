@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — netpaytool.com",
+  title: "Privacy Policy: netpaytool.com",
   description: "Privacy policy for netpaytool.com. We don't store your salary or tax data.",
   alternates: { canonical: "https://netpaytool.com/privacy" },
 };
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <main className="max-w-2xl mx-auto px-4 py-16" style={{ color: "var(--text-secondary)" }}>
-      <h1 className="text-3xl font-black mb-2" style={{ color: "var(--text-primary)" }}>
+      <h1 className="text-3xl font-semibold mb-2" style={{ color: "var(--text-primary)" }}>
         Privacy Policy
       </h1>
       <p className="text-sm mb-10" style={{ color: "var(--text-muted)" }}>

@@ -4,7 +4,7 @@ import Link from "next/link";
 export const dynamic = 'force-static';
 
 export const metadata: Metadata = {
-  title: "Methodology — Take-Home Pay Calculator",
+  title: "Methodology: Take-Home Pay Calculator",
   description: "How we calculate take-home pay. Tax brackets, FICA rates, state tax methodology, and limitations.",
   alternates: { canonical: "https://netpaytool.com/methodology" },
 };
@@ -30,7 +30,7 @@ export default function MethodologyPage() {
           &larr; Back to calculator
         </Link>
 
-        <h1 className="text-3xl font-black mb-2">Methodology</h1>
+        <h1 className="text-3xl font-semibold mb-2">Methodology</h1>
         <p className="text-sm mb-10" style={{ color: "var(--text-muted)" }}>How this calculator works and where the data comes from.</p>
 
         <div className="space-y-8 text-sm leading-relaxed" style={{ color: "var(--text-muted)" }}>
@@ -48,7 +48,7 @@ export default function MethodologyPage() {
           <section>
             <h2 className="text-lg font-bold mb-3" style={{ color: "var(--text)" }}>State income tax</h2>
             <p>State income tax uses a simplified effective rate for each state, based on Tax Foundation 2026 data (the marginal rate at $100,000 in taxable income). Nine states have no income tax: Alaska, Florida, Nevada, New Hampshire, South Dakota, Tennessee, Texas, Washington, and Wyoming. For other states, we apply a flat effective rate approximation rather than full graduated bracket calculations.</p>
-            <p className="mt-3">This means state tax estimates are approximations — actual state tax can differ based on state-specific deductions, credits, and local taxes not captured here.</p>
+            <p className="mt-3">This means state tax estimates are approximations: actual state tax can differ based on state-specific deductions, credits, and local taxes not captured here.</p>
           </section>
 
           <section>

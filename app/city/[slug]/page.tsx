@@ -39,7 +39,7 @@ export async function generateMetadata({
   const takeHome = formatCurrencyFull(result.netAnnual);
 
   return {
-    title: `Take-Home Pay in ${city.name} — ${city.state} Salary Calculator`,
+    title: `Take-Home Pay in ${city.name}: ${city.state} Salary Calculator`,
     description: `The median salary in ${city.name} is ${formatCurrencyFull(city.medianSalary)}. After federal and ${city.state} state taxes, a single filer takes home ${takeHome} per year. See your full breakdown.`,
     alternates: { canonical: `https://netpaytool.com/city/${slug}` },
     openGraph: {
@@ -79,7 +79,7 @@ function buildFaqs(city: (typeof CITY_DATA)[string]): FaqItem[] {
     },
     {
       q: `How does ${city.name}'s cost of living affect your paycheck?`,
-      a: `${city.name} has a cost of living index of ${city.colIndex} — ${colLabel} the US national average. While your take-home pay is the same in dollar terms regardless of location, your purchasing power is ${city.colIndex > 100 ? "lower" : city.colIndex < 100 ? "higher" : "the same"} than the US average. A ${gross} salary in ${city.name} buys ${city.colIndex > 100 ? "less" : "more"} than the same salary in an average-cost US city.`,
+      a: `${city.name} has a cost of living index of ${city.colIndex}: ${colLabel} the US national average. While your take-home pay is the same in dollar terms regardless of location, your purchasing power is ${city.colIndex > 100 ? "lower" : city.colIndex < 100 ? "higher" : "the same"} than the US average. A ${gross} salary in ${city.name} buys ${city.colIndex > 100 ? "less" : "more"} than the same salary in an average-cost US city.`,
     },
     {
       q: hasStateTax ? `How much state income tax do you pay in ${city.name}?` : `Does ${city.name} have state income tax?`,
@@ -141,7 +141,7 @@ export default async function CityPayPage({ params }: { params: Promise<{ slug: 
           {" / "}<span>City</span>{" / "}<span>{city.name}</span>
         </nav>
 
-        <h1 className="font-black mb-3 leading-tight" style={{ fontSize: "clamp(22px, 5vw, 34px)" }}>
+        <h1 className="font-semibold mb-3 leading-tight" style={{ fontSize: "clamp(22px, 5vw, 34px)" }}>
           Take-Home Pay in <span className="text-gradient-1">{city.name}</span>
         </h1>
         <p className="text-base leading-relaxed mb-8" style={{ color: "var(--text-muted)" }}>
@@ -154,7 +154,7 @@ export default async function CityPayPage({ params }: { params: Promise<{ slug: 
 
         {/* Take-home by salary tier */}
         <div className="gradient-border-result rounded-xl p-6 mb-8">
-          <p className="terminal-label mb-4">Take-home pay in {city.name} — single filer</p>
+          <p className="terminal-label mb-4">Take-home pay in {city.name}: single filer</p>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
@@ -197,7 +197,7 @@ export default async function CityPayPage({ params }: { params: Promise<{ slug: 
 
         {/* City stats */}
         <div className="aura-panel p-5 mb-8">
-          <p className="terminal-label mb-4">{city.name} — key figures</p>
+          <p className="terminal-label mb-4">{city.name}: key figures</p>
           <div className="space-y-2">
             {[
               { label: "Median salary (BLS 2024)", value: formatCurrencyFull(city.medianSalary) },

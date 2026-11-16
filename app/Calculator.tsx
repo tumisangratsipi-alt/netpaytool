@@ -74,7 +74,7 @@ function ResultCard({ result, period }: { result: ReturnType<typeof calculateTax
           {PAY_PERIOD_LABELS[period]} take-home
         </p>
         <p
-          className="font-black leading-none"
+          className="font-semibold leading-none"
           style={{
             fontSize: "clamp(48px, 12vw, 84px)",
             background: "linear-gradient(135deg, #16A34A 0%, #22C55E 45%, #86EFAC 100%)",
@@ -162,13 +162,13 @@ function ResultCard({ result, period }: { result: ReturnType<typeof calculateTax
         </a>
 
         <div className="pt-3 border-t" style={{ borderColor: "var(--border-default, rgba(255,255,255,0.06))" }}>
-          <p className="text-xs font-bold uppercase tracking-wider mb-2" style={{ color: "var(--text-muted)" }}>Related tools</p>
+          <p className="text-xs font-bold mb-2" style={{ color: "var(--text-muted)" }}>Related tools</p>
           <div className="flex flex-col gap-2">
             <a href="https://salaryfact.com" target="_blank" rel="noopener noreferrer" className="text-sm" style={{ color: "#22C55E", textDecoration: "none" }}>
-              SalaryFact — how does your salary compare in your city? &rarr;
+              SalaryFact: how does your salary compare in your city? &rarr;
             </a>
             <a href="https://networthrank.com" target="_blank" rel="noopener noreferrer" className="text-sm" style={{ color: "#22C55E", textDecoration: "none" }}>
-              NetWorthRank — what wealth percentile does your income put you in? &rarr;
+              NetWorthRank: what wealth percentile does your income put you in? &rarr;
             </a>
           </div>
         </div>
@@ -189,7 +189,7 @@ function AffiliateCTA({ route }: { route: NetPayRouteResult }) {
         border: `1px solid ${route.colorHex}33`,
       }}
     >
-      <p className="text-xs font-bold uppercase tracking-wider mb-1" style={{ color: route.colorHex }}>
+      <p className="text-xs font-bold mb-1" style={{ color: route.colorHex }}>
         Based on your debt load
       </p>
       <p className="text-sm mb-3 leading-relaxed" style={{ color: "var(--text-muted)" }}>
@@ -223,7 +223,7 @@ function LiveRateContext() {
   if (!data) return null;
   const hysa = Math.max(data.treasuryYield - 0.15, 4.5);
   return (
-    <div className="mb-5 rounded-lg px-4 py-2.5 flex flex-wrap items-center gap-x-5 gap-y-1.5 text-[11px] font-mono" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
+    <div className="mb-5 rounded-lg px-4 py-2.5 flex flex-wrap items-center gap-x-5 gap-y-1.5 text-xs font-mono" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
       <span className="flex items-center gap-1.5" style={{ color: "rgba(255,255,255,0.35)" }}>
         <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#4ADE80", display: "inline-block", boxShadow: "0 0 4px #4ADE80" }} />
         LIVE
@@ -235,7 +235,7 @@ function LiveRateContext() {
         HYSA <span style={{ color: "#4ADE80" }}>~{hysa.toFixed(1)}%</span> APY
       </span>
       <span style={{ color: "rgba(255,255,255,0.4)", fontSize: 10 }}>
-        CPI {data.inflationRate.toFixed(1)}% — every after-tax dollar matters
+        CPI {data.inflationRate.toFixed(1)}%: every after-tax dollar matters
       </span>
     </div>
   );
@@ -262,7 +262,7 @@ export default function Calculator({
     const raw = salaryInput.replace(/[$,\s]/g, "");
     const salary = parseFloat(raw);
     if (isNaN(salary) || salary <= 0) {
-      setError("Enter a valid annual salary — e.g. 75000.");
+      setError("Enter a valid annual salary: e.g. 75000.");
       return;
     }
     if (!filingStatus) {
@@ -312,10 +312,10 @@ export default function Calculator({
       <LiveRateContext />
       <div className="aura-panel p-6">
         <div className="flex items-center justify-between pb-4 mb-5" style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
-          <span className="text-[10px] font-mono font-bold uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.45)" }}>
+          <span className="text-xs font-mono font-bold" style={{ color: "rgba(255,255,255,0.45)" }}>
             Take-Home Pay Calculator
           </span>
-          <span className="inline-flex items-center gap-1 text-[8px] font-mono tracking-wide rounded px-1.5 py-0.5"
+          <span className="inline-flex items-center gap-1 text-xs font-mono rounded px-1.5 py-0.5"
             style={{ color: "var(--color-accent)", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)" }}>
             <span style={{ width: 4, height: 4, borderRadius: "50%", background: "var(--color-accent)", display: "inline-block" }} />
             Live data
@@ -333,7 +333,7 @@ export default function Calculator({
               onChange={(e) => setSalaryInput(e.target.value)}
               onKeyDown={handleKeyDown}
               autoComplete="off"
-              className="w-full rounded-lg px-4 py-3 text-base font-mono tracking-wider transition-[color,box-shadow,border-color] duration-150 ease-out"
+              className="w-full rounded-lg px-4 py-3 text-base font-mono transition-[color,box-shadow,border-color] duration-150 ease-out"
               style={inputStyle}
             />
             <p className="text-xs mt-2" style={{ color: "var(--text-muted)" }}>
@@ -351,7 +351,7 @@ export default function Calculator({
               onChange={(e) => setDebtInput(e.target.value)}
               onKeyDown={handleKeyDown}
               autoComplete="off"
-              className="w-full rounded-lg px-4 py-3 text-base font-mono tracking-wider transition-[color,box-shadow,border-color] duration-150 ease-out"
+              className="w-full rounded-lg px-4 py-3 text-base font-mono transition-[color,box-shadow,border-color] duration-150 ease-out"
               style={inputStyle}
             />
             <p className="text-xs mt-2" style={{ color: "var(--text-muted)" }}>
@@ -400,7 +400,7 @@ export default function Calculator({
                 <button
                   key={p}
                   onClick={() => setPeriod(p)}
-                  className="rounded-md px-2 py-2 text-xs font-mono font-bold uppercase tracking-wider transition-[background-color,color,transform] duration-150 ease-out active:scale-[0.97]"
+                  className="rounded-md px-2 py-2 text-xs font-mono font-bold transition-[background-color,color,transform] duration-150 ease-out active:scale-[0.97]"
                   style={{
                     background: period === p ? "rgba(34,197,94,0.15)" : "rgba(255,255,255,0.03)",
                     border: period === p ? "1px solid rgba(34,197,94,0.5)" : "1px solid var(--border-default)",

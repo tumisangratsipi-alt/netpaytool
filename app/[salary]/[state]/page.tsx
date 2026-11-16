@@ -52,14 +52,14 @@ export async function generateMetadata({
   const gross = formatCurrencyFull(salary);
 
   return {
-    title: `${gross} Salary in ${name} — Take-Home Pay Calculator`,
+    title: `${gross} Salary in ${name}: Take-Home Pay Calculator`,
     description: `A ${gross} salary in ${name} takes home ${takehome} per year after federal and state taxes. See your bi-weekly, monthly, and annual take-home pay breakdown.`,
     alternates: {
       canonical: `https://netpaytool.com/${salarySlug}/${stateSlug}`,
     },
     openGraph: {
       title: `${gross} in ${name}: ${takehome} Take-Home Pay`,
-      description: `Federal tax, ${name} state tax, FICA — see every deduction on a ${gross} salary.`,
+      description: `Federal tax, ${name} state tax, FICA: see every deduction on a ${gross} salary.`,
       url: `https://netpaytool.com/${salarySlug}/${stateSlug}`,
     },
   };
@@ -240,7 +240,7 @@ export default async function SalaryStatePage({
 
         {/* Hero */}
         <div className="mb-8">
-          <h1 className="font-black mb-3 leading-tight" style={{ fontSize: "clamp(22px, 5vw, 36px)" }}>
+          <h1 className="font-semibold mb-3 leading-tight" style={{ fontSize: "clamp(22px, 5vw, 36px)" }}>
             {gross} Salary in {name}
             <br />
             <span className="text-gradient-1">Take-Home Pay</span>
@@ -257,7 +257,7 @@ export default async function SalaryStatePage({
         <div
           className="gradient-border-result rounded-xl p-6 mb-8"
         >
-          <p className="terminal-label mb-4">Take-home pay — single filer</p>
+          <p className="terminal-label mb-4">Take-home pay: single filer</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {periods.map((p) => (
               <div
@@ -279,7 +279,7 @@ export default async function SalaryStatePage({
 
         {/* Tax breakdown table */}
         <section className="mb-10">
-          <h2 className="text-lg font-bold mb-4">Tax breakdown — {gross} in {name}</h2>
+          <h2 className="text-lg font-bold mb-4">Tax breakdown: {gross} in {name}</h2>
           <div className="overflow-x-auto rounded-xl" style={{ border: "1px solid var(--border-subtle)" }}>
             <table className="w-full text-sm">
               <thead>
@@ -334,11 +334,11 @@ export default async function SalaryStatePage({
           className="mb-8 p-5 rounded-xl"
           style={{ background: "rgba(212,175,55,0.06)", border: "1px solid rgba(212,175,55,0.25)" }}
         >
-          <p className="text-xs font-bold uppercase tracking-wider mb-2" style={{ color: "var(--amber-500)" }}>
+          <p className="text-xs font-bold mb-2" style={{ color: "var(--amber-500)" }}>
             Effective tax rate
           </p>
           <p className="text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
-            A single filer earning {gross} in {name} has a <strong style={{ color: "var(--amber-400)" }}>{formatPercent(single.effectiveTotalRate)} total effective tax rate</strong> — {formatPercent(single.effectiveFederalRate)} federal,{" "}
+            A single filer earning {gross} in {name} has a <strong style={{ color: "var(--amber-400)" }}>{formatPercent(single.effectiveTotalRate)} total effective tax rate</strong>: {formatPercent(single.effectiveFederalRate)} federal,{" "}
             {hasStateTax ? `${formatPercent(stateRate)} ${name} state, ` : `0% ${name} state (no income tax), `}
             plus 7.65% FICA. The marginal rate on the top dollar of income is higher than the effective rate shown here.
             {isNoTaxState && ` ${name} workers keep an extra ${formatCurrencyFull(salary * 0.05)}-${formatCurrencyFull(salary * 0.09)} per year compared to high-tax states.`}
@@ -358,7 +358,7 @@ export default async function SalaryStatePage({
             {[
               {
                 q: `What is the take-home pay for a ${gross} salary in ${name}?`,
-                a: `A ${gross} salary in ${name} takes home approximately ${singleNet} per year for a single filer after all taxes. That is ${formatCurrencyFull(getNetForPeriod(single.netAnnual, "biweekly"))} bi-weekly or ${formatCurrencyFull(getNetForPeriod(single.netAnnual, "monthly"))} per month. Married filers take home more — ${formatCurrencyFull(married.netAnnual)} annually — due to the higher standard deduction.`,
+                a: `A ${gross} salary in ${name} takes home approximately ${singleNet} per year for a single filer after all taxes. That is ${formatCurrencyFull(getNetForPeriod(single.netAnnual, "biweekly"))} bi-weekly or ${formatCurrencyFull(getNetForPeriod(single.netAnnual, "monthly"))} per month. Married filers take home more (${formatCurrencyFull(married.netAnnual)} annually) due to the higher standard deduction.`,
               },
               {
                 q: `How much federal income tax do you pay on ${gross} in ${name}?`,

@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Take-Home Pay Calculator — Net Pay After Taxes",
+  title: "Take-Home Pay Calculator: Net Pay After Taxes",
   description:
     "Calculate your exact take-home pay after federal, state, and FICA taxes. All 50 states. 2026 tax brackets. Free, no sign-up.",
 };
@@ -15,7 +15,7 @@ const faqItems = [
   },
   {
     q: "Why is my take-home pay different from what this calculator shows?",
-    a: "This calculator uses the 2026 standard deduction and effective state tax rates. Your actual paycheck may differ based on: pre-tax deductions (401k, health insurance, HSA), additional W-4 withholding elections, local city or county taxes, and state-specific deductions. Use this as an estimate — your payroll department has the exact numbers.",
+    a: "This calculator uses the 2026 standard deduction and effective state tax rates. Your actual paycheck may differ based on: pre-tax deductions (401k, health insurance, HSA), additional W-4 withholding elections, local city or county taxes, and state-specific deductions. Use this as an estimate: your payroll department has the exact numbers.",
   },
   {
     q: "What is the difference between gross pay and net pay?",

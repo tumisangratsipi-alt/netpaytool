@@ -22,7 +22,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 const ADSENSE_PUBLISHER_ID = "ca-pub-1046440660422479";
 
 export const metadata: Metadata = {
-  title: "Take-Home Pay Calculator — Net Pay After Taxes",
+  title: "Take-Home Pay Calculator: Net Pay After Taxes",
   description:
     "Calculate your exact take-home pay after federal, state, and FICA taxes. All 50 states. 2026 tax brackets. Free, no sign-up.",
   metadataBase: new URL("https://netpaytool.com"),
