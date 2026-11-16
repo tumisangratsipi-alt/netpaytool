@@ -211,7 +211,6 @@
   inset: -1px;
   border-radius: inherit;
   border: 1px solid var(--color-accent);
-  box-shadow: 0 0 24px var(--color-accent-glow), 0 0 8px var(--color-accent-glow-subtle);
   pointer-events: none;
   animation: resultGlowFade 2.4s var(--ease-smooth) forwards;
 }
@@ -292,25 +291,23 @@
   }
 
   .terminal-label {
-    @apply text-[10px] font-mono font-bold uppercase tracking-widest text-slate-500;
+    @apply text-xs font-mono font-medium text-slate-500;
   }
 
   .glow-amber {
-    text-shadow: 0 0 12px var(--color-accent-glow);
+    text-shadow: none;
   }
 
   .tabular-gold {
-    @apply font-mono tracking-widest tabular-nums;
+    @apply font-mono tabular-nums;
     color: var(--color-accent);
   }
 
   .btn-orbital {
-    @apply relative inline-flex items-center justify-center font-mono tracking-[0.15em] uppercase text-sm border border-amber-500/50 bg-transparent text-amber-400 transition-[background-color,border-color,color,box-shadow,transform] duration-200 ease-out rounded-md px-6 py-3;
-    box-shadow: 0 0 10px var(--color-accent-glow-subtle);
+    @apply relative inline-flex items-center justify-center font-mono text-sm border border-amber-500/50 bg-transparent text-amber-400 transition-[background-color,border-color,color,box-shadow,transform] duration-200 ease-out rounded-md px-6 py-3;
   }
   .btn-orbital:hover {
     @apply text-white border-white bg-amber-500/20;
-    box-shadow: 0 0 20px var(--color-accent-glow);
   }
 
   .btn-primary-gold {
@@ -322,7 +319,6 @@
   }
   .btn-primary-gold:hover {
     background: var(--color-accent-2);
-    box-shadow: 0 0 20px var(--color-accent-glow);
   }
   .btn-primary-gold:active {
     transform: scale(0.97);
@@ -424,7 +420,6 @@ input[type="text"]:focus {
     color: #fff;
     border-color: #fff;
     background: var(--color-accent-glow);
-    box-shadow: 0 0 20px var(--color-accent-glow);
   }
   button, a, [role="button"] {
     min-height: 44px;

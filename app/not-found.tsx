@@ -3,10 +3,10 @@ import Link from "next/link";
 export default function NotFound() {
   return (
     <main className="min-h-[60vh] flex flex-col items-center justify-center px-4 text-center">
-      <p className="text-xs font-mono uppercase tracking-widest mb-4" style={{ color: "#22C55E" }}>
+      <p className="text-xs font-mono mb-4" style={{ color: "#22C55E" }}>
         404
       </p>
-      <h1 className="text-4xl font-black mb-3" style={{ color: "var(--text-primary)" }}>
+      <h1 className="text-4xl font-semibold mb-3" style={{ color: "var(--text-primary)" }}>
         Page not found
       </h1>
       <p className="mb-8 max-w-sm" style={{ color: "var(--text-muted)" }}>
