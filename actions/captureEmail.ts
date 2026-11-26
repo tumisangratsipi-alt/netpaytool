@@ -1,6 +1,6 @@
 "use server";
 
-// actions/captureEmail.ts — netpaytool.com
+// actions/captureEmail.ts (netpaytool.com)
 
 import { createClient } from "@supabase/supabase-js";
 

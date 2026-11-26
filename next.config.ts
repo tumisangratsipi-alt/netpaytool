@@ -15,14 +15,14 @@ const nextConfig: NextConfig = {
 
   async headers() {
     return [
-      // Static assets — 1 year, immutable
+      // Static assets: 1 year, immutable
       {
         source: "/_next/static/(.*)",
         headers: [
           { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
         ],
       },
-      // All pages — security headers
+      // All pages: security headers
       {
         source: "/(.*)",
         headers: [

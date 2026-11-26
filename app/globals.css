@@ -16,7 +16,7 @@
   --color-panel: #111318;
   --color-surface: #16181F;
 
-  /* Violet — ACCENT */
+  /* Violet: ACCENT */
   --color-amber-400: #C4B5FD;
   --color-amber-500: #A78BFA;
   --color-amber-600: #7C3AED;
@@ -38,7 +38,7 @@
     --background: oklch(10% 0.008 265);
     --foreground: oklch(96% 0.005 220);
 
-    /* Paper — void dark (OKLCH) */
+    /* Paper: void dark (OKLCH) */
     --color-paper:   oklch(10% 0.008 265);
     --color-paper-2: oklch(13% 0.010 265);
     --color-paper-3: oklch(16% 0.012 265);
@@ -50,7 +50,7 @@
     --color-ink-muted:    oklch(62% 0.010 220);
     --color-ink-disabled: oklch(30% 0.005 220);
 
-    /* Accent — violet (OKLCH) */
+    /* Accent: violet (OKLCH) */
     --color-accent:      oklch(73% 0.175 293);
     --color-accent-2:    oklch(80% 0.155 293);
     --color-accent-dark: oklch(52% 0.235 290);
@@ -86,7 +86,7 @@
     --font-body:    "Plus Jakarta Sans", system-ui, sans-serif;
     --font-outlier: "JetBrains Mono", "Fira Code", monospace;
 
-    /* Spacing — 4pt scale */
+    /* Spacing: 4pt scale */
     --space-3xs: 0.25rem;
     --space-2xs: 0.5rem;
     --space-xs:  0.75rem;
@@ -137,7 +137,7 @@
     --ring: oklch(73% 0.175 293);
     --muted-foreground: oklch(62% 0.010 220);
 
-    /* Legacy aliases — emerald accent */
+    /* Legacy aliases: emerald accent */
     --void-800: oklch(10% 0.008 265);
     --void-700: oklch(13% 0.010 265);
     --void-600: oklch(16% 0.012 265);
@@ -201,7 +201,7 @@
   --color-primary-foreground: var(--primary-foreground);
 }
 
-/* Reactive glow — toggled on calculation complete, removed at zero-state */
+/* Reactive glow: toggled on calculation complete, removed at zero-state */
 .result-glow {
   position: relative;
 }
@@ -277,7 +277,7 @@
 }
 
 @layer utilities {
-  /* Accent text — solid gold, no gradient */
+  /* Accent text: solid gold, no gradient */
   .text-gradient-1 {
     color: var(--color-accent-2);
   }

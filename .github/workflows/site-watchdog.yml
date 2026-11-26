@@ -5,8 +5,8 @@ name: Site Watchdog
 # Passenger restart file. Sends a Slack alert whether it healed or failed.
 #
 # Requires secrets:
-#   HOSTINGER_SSH_KEY    — private key for u262250925@82.197.80.250 (port 65002)
-#   SLACK_WEBHOOK_URL    — incoming webhook for #alerts (optional but recommended)
+#   HOSTINGER_SSH_KEY:    private key for u262250925@82.197.80.250 (port 65002)
+#   SLACK_WEBHOOK_URL:    incoming webhook for #alerts (optional but recommended)
 
 on:
   schedule:
@@ -52,7 +52,7 @@ jobs:
             -o ServerAliveInterval=5 \
             u262250925@82.197.80.250 \
             'pkill -f next-server; sleep 3; touch ~/domains/netpaytool.com/nodejs/tmp/restart.txt; echo "done"' \
-            || echo "SSH command failed — Hostinger may be unreachable"
+            || echo "SSH command failed: Hostinger may be unreachable"
           rm -f /tmp/hostinger_key
 
       - name: Verify recovery
@@ -75,7 +75,7 @@ jobs:
           [ -z "$SLACK_WEBHOOK_URL" ] && exit 0
           curl -s -X POST "$SLACK_WEBHOOK_URL" \
             -H "Content-Type: application/json" \
-            -d "{\"text\":\":white_check_mark: *netpaytool.com auto-healed* — was HTTP ${PRE_STATUS}, now 200. Zombie processes killed. <${RUN_URL}|View run>\"}"
+            -d "{\"text\":\":white_check_mark: *netpaytool.com auto-healed*, was HTTP ${PRE_STATUS}, now 200. Zombie processes killed. <${RUN_URL}|View run>\"}"
 
       - name: Slack alert (still down)
         if: steps.health.outputs.healthy == 'false' && steps.verify.outputs.recovered == 'false'

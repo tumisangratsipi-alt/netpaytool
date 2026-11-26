@@ -281,7 +281,7 @@ export default function Calculator({
     setResult(res);
     setRoute(routeResult);
 
-    // Fire-and-forget — never awaited
+    // Fire-and-forget: never awaited
     const filingCode = filingStatus === "single" ? 0 : filingStatus === "married" ? 1 : 2;
     const periodCodes: Record<PayPeriod, number> = { weekly: 1, biweekly: 2, semimonthly: 4, monthly: 12, annual: 0 };
     void logTelemetry({

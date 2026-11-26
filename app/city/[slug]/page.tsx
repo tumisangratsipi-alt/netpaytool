@@ -105,7 +105,7 @@ export default async function CityPayPage({ params }: { params: Promise<{ slug: 
   const medianResult = calculateTax(city.medianSalary, "single", city.stateCode);
   const hasStateTax = medianResult.stateTax > 0;
 
-  // JSON-LD: all content derived from static CITY_DATA — no user input.
+  // JSON-LD: all content derived from static CITY_DATA: no user input.
   const webpageJsonLd = JSON.stringify({
     "@context": "https://schema.org",
     "@type": "WebPage",

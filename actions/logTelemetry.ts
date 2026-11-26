@@ -1,6 +1,6 @@
 "use server";
 
-// actions/logTelemetry.ts — netpaytool.com
+// actions/logTelemetry.ts (netpaytool.com)
 // Server Action: inserts one row per calculate click. Never awaited in the UI.
 // Requires SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY in .env.local
 
