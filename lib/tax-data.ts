@@ -1,4 +1,4 @@
-// US Federal & State Tax Data — 2026 tax year
+// US Federal & State Tax Data: 2026 tax year
 // Federal brackets: IRS Rev. Proc. 2025-32 (published Oct 9, 2025),
 // https://www.irs.gov/pub/irs-drop/rp-25-32.pdf, Section 4 tax rate
 // tables. Every bracket threshold below was cross-verified against the
@@ -9,15 +9,15 @@
 // Audited 2026-08-31, corrected from a prior version of this file that
 // was one full tax year stale (2025 brackets, shown as current on a
 // live paycheck calculator) AND mis-cited its own source (labeled
-// "Rev. Proc. 2024-61", which doesn't exist — the real 2025-vintage
+// "Rev. Proc. 2024-61", which doesn't exist, the real 2025-vintage
 // citation is Rev. Proc. 2024-40). The 2025 standard deduction figures
 // that prior version used were also superseded mid-year by the One,
 // Big, Beautiful Bill Act (OBBBA), which retroactively raised the 2025
 // standard deduction (to $15,750 single / $31,500 MFJ / $23,625 HOH)
-// before the 2026 figures below took effect — so the old numbers were
+// before the 2026 figures below took effect, so the old numbers were
 // wrong for 2025 by the time this was caught, not just outdated.
 //
-// State rates: Tax Foundation 2026 data, audited 2026-09-04 — see
+// State rates: Tax Foundation 2026 data, audited 2026-09-04, see
 // STATE_TAX_RATES comment below.
 
 export type FilingStatus = "single" | "married" | "hoh";
@@ -80,7 +80,7 @@ export const FEDERAL_BRACKETS: Record<FilingStatus, [number, number, number][]> 
 
 // FICA 2026. Wage base: SSA announcement, Oct 24, 2025 ($184,500, up
 // from $176,100 in 2025). Medicare rate/surtax thresholds are set by
-// statute (ACA), not indexed annually — unchanged.
+// statute (ACA), not indexed annually, unchanged.
 export const SOCIAL_SECURITY_RATE = 0.062;
 export const SOCIAL_SECURITY_WAGE_BASE = 184500;
 export const MEDICARE_RATE = 0.0145;
@@ -88,11 +88,11 @@ export const MEDICARE_SURTAX_RATE = 0.009;
 export const MEDICARE_SURTAX_THRESHOLD_SINGLE = 200000;
 export const MEDICARE_SURTAX_THRESHOLD_MARRIED = 250000;
 
-// State income tax — effective marginal rate at $100,000 single-filer
+// State income tax: effective marginal rate at $100,000 single-filer
 // taxable income, for all 50 states + DC. No-tax states = 0. This is a
 // simplified single-rate model (one number per state, not a real bracket
 // calculation against the user's actual income), same approach the prior
-// version used — $100K was reverse-engineered as the reference income
+// version used, $100K was reverse-engineered as the reference income
 // that best reproduced the prior version's numbers before they went
 // stale, so this update keeps the same intent, just current data.
 //
@@ -101,7 +101,7 @@ export const MEDICARE_SURTAX_THRESHOLD_MARRIED = 250000;
 // rates-2026/), downloaded XLSX (2026-State-Individual-Income-Tax-Rates-
 // Brackets.xlsx), "2026" sheet. Full bracket schedules were parsed for
 // all 51 jurisdictions and the marginal rate at $100,000 taken directly
-// from each state's real 2026 bracket table — not read off a single
+// from each state's real 2026 bracket table, not read off a single
 // pre-summarized column.
 //
 // Washington is 0 here even though Tax Foundation's table lists a 7%/9%
@@ -109,17 +109,17 @@ export const MEDICARE_SURTAX_THRESHOLD_MARRIED = 250000;
 // $270K+, not wage/salary income, which is what this calculator computes
 // (confirmed via the table's own footnote). WA also has a separate 0.58%
 // payroll tax funding the WA Cares long-term-care program, withheld from
-// gross wages — not modeled here, consistent with this file not modeling
+// gross wages, not modeled here, consistent with this file not modeling
 // any other state's special payroll surcharges either.
 //
 // Audited 2026-09-04, replacing 2024-vintage data that the prior version
-// of this file itself already flagged as stale — several states (Georgia,
+// of this file itself already flagged as stale, several states (Georgia,
 // Iowa, Mississippi, and others) have had real rate cuts since 2024 that
 // the old numbers missed (Iowa's flat-tax transition alone dropped its
 // rate from 5.7% to 3.8%). Also found and fixed one apparent data error
 // in the old figures, not just staleness: Massachusetts was listed at
 // 9%, but MA's flat rate has been 5% since 2020, with its "millionaire's
-// tax" surtax only applying above $1,083,150 — nowhere close to the
+// tax" surtax only applying above $1,083,150, nowhere close to the
 // $100K reference income this file uses.
 export const STATE_TAX_RATES: Record<string, number> = {
   AL: 0.05, AK: 0, AZ: 0.025, AR: 0.039, CA: 0.093,
@@ -192,7 +192,7 @@ export function calculateTax(
     grossAnnual * MEDICARE_RATE +
     Math.max(0, grossAnnual - surtaxThreshold) * MEDICARE_SURTAX_RATE;
 
-  // 4. State income tax (flat effective rate — approximation)
+  // 4. State income tax (flat effective rate, approximation)
   const stateRate = STATE_TAX_RATES[stateCode] ?? 0;
   const stateTax = grossAnnual * stateRate;
 

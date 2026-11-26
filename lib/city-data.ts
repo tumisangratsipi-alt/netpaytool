@@ -1,4 +1,4 @@
-// Netpaytool City Data — netpaytool.com
+// Netpaytool City Data (netpaytool.com)
 // Cost-of-living index, median salary, and state mapping per metro.
 // COL index: 100 = national average. Source: C2ER 2024 / BLS OES 2024.
 

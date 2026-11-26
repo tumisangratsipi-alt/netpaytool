@@ -49,7 +49,7 @@ def get_current_tax_year_in_file() -> int:
     Falls back to 2024 if not found.
     """
     content = TAX_DATA_FILE.read_text(encoding="utf-8")
-    m = re.search(r"// US Federal & State Tax Data — (\d{4}) tax year", content)
+    m = re.search(r"// US Federal & State Tax Data: (\d{4}) tax year", content)
     if m:
         return int(m.group(1))
     # Fallback: look for Rev. Proc. year in source comment
@@ -216,7 +216,7 @@ def update_tax_data(new_deductions: dict, new_year: int, source: str) -> None:
 
     # Update header comment
     content = re.sub(
-        r"(// US Federal & State Tax Data — )\d{4}( tax year)",
+        r"(// US Federal & State Tax Data: )\d{4}( tax year)",
         rf"\g<1>{new_year}\g<2>",
         content,
     )

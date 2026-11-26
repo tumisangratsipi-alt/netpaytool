@@ -1,4 +1,4 @@
-// lib/routingLogic.ts — netpaytool.com
+// lib/routingLogic.ts (netpaytool.com)
 // Affiliate URLs: env vars in production, fallback slugs for now.
 
 export const CALCMONEY_GOLD = "#D4AF37" as const;
@@ -44,7 +44,7 @@ export function resolveNetPayRoute(
 
   return {
     url: URLS.zeroPctCard,
-    label: "Pay It Down Faster — 0% APR Cards",
+    label: "Pay It Down Faster: 0% APR Cards",
     sublabel: "Transfer your balance to a 0% APR card and eliminate interest while you pay it off.",
     colorHex: "#22C55E",
     product: "zero_apr_card",
